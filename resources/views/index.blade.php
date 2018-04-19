@@ -17,8 +17,8 @@
 </ol>
 <div class="carousel-inner" role="listbox">
     <div class="carousel-item">
-        <div class="page-header header-filter">
-            <div class="page-header-image" style="background-image: url('../assets/img/bg40.jpg');"></div>
+        <div class="page-header header-filter header-mini">
+            <div class="page-header-image" style="background-image: url('/assets/img/bg40.jpg');"></div>
             <div class="content-center text-center">
                 <div class="row">
                     <div class="col-md-8 ml-auto mr-auto2">
@@ -29,39 +29,8 @@
             </div>
         </div>
     </div>
-    <div class="carousel-item active">
-        <div class="page-header header-filter">
-            <div class="page-header-image" style="background-image: url('../assets/img/bg41.jpg');"></div>
-            <div class="content-center">
-                <div class="row">
-                    <div class="col-md-8 ml-auto mr-auto text-center">
-                        <h1 class="title">Street Style: Couture.</h1>
-                        <h4 class="description text-white">See what Karlie Kloss, Tracee Ellis Ross and others wore between the shows...</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="carousel-item">
-        <div class="page-header header-filter">
-            <div class="page-header-image" style="background-image: url('../assets/img/bg29.jpg');"></div>
-            <div class="content-center text-center">
-                <div class="row">
-                    <div class="col-md-8 ml-auto mr-auto">
-                        <h1 class="title">For Men With Style.</h1>
-                        <h4 class="description text-white">Shirts that actually fit? Check. Linen shorts? Yup. Those wider pants suddenly in style? Got them, too....</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
-<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <i class="now-ui-icons arrows-1_minimal-left"></i>
-</a>
-<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <i class="now-ui-icons arrows-1_minimal-right"></i>
-</a>
 </div>
 <div class="main">
     <div class="section">

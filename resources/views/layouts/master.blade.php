@@ -6,7 +6,7 @@
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title> Ecommerce - Now UI Kit Pro by Creative Tim | Premium Bootstrap 4 UI Kit </title>
+	<title> @yield('title') </title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
@@ -18,37 +18,11 @@
 	<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/assets/css/now-ui-kit.css" rel="stylesheet" />
 
-	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link href="/assets/css/demo.css" rel="stylesheet" />
 
-	<!-- Canonical SEO -->
-	<link rel="canonical" href="https://www.creative-tim.com/product/now-ui-kit-pro" />
 	<!--  Social tags      -->
-	<meta name="keywords" content="bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, now ui, now ui kit pro, creative tim, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
-	<meta name="description" content="Start your development with a beautiful Bootstrap 4 UI kit.">
-	<!-- Schema.org markup for Google+ -->
-	<meta itemprop="name" content="Now UI Kit Pro by Creative Tim">
-	<meta itemprop="description" content="Start your development with a beautiful Bootstrap 4 UI kit.">
-	<meta itemprop="image" content="http://s3.amazonaws.com/creativetim_bucket/products/62/original/opt_nukp_thumbnail.jpg">
-	<!-- Twitter Card data -->
-	<meta name="twitter:card" content="product">
-	<meta name="twitter:site" content="@creativetim">
-	<meta name="twitter:title" content="Now UI Kit Pro by Creative Tim">
-	<meta name="twitter:description" content="Start your development with a beautiful Bootstrap 4 UI kit.">
-	<meta name="twitter:creator" content="@creativetim">
-	<meta name="twitter:image" content="http://s3.amazonaws.com/creativetim_bucket/products/62/original/opt_nukp_thumbnail.jpg">
-	<meta name="twitter:data1" content="Now UI Kit Pro by Creative Tim">
-	<meta name="twitter:label1" content="Product Type">
-	<meta name="twitter:data2" content="$69">
-	<meta name="twitter:label2" content="Price">
-	<!-- Open Graph data -->
-	<meta property="fb:app_id" content="655968634437471">
-	<meta property="og:title" content="Now UI Kit Pro by Creative Tim" />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="http://demos.creative-tim.com/now-ui-kit-pro/presentation.html" />
-	<meta property="og:image" content="http://s3.amazonaws.com/creativetim_bucket/products/62/original/opt_nukp_thumbnail.jpg" />
-	<meta property="og:description" content="Start your development with a beautiful Bootstrap 4 UI kit." />
-	<meta property="og:site_name" content="Creative Tim" />
+	<meta name="keywords" content="@yield('keywords')">
+	<meta name="description" content="@yield('description')">
 
 
 
