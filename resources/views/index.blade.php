@@ -33,484 +33,134 @@
 </div>
 </div>
 <div class="main">
+  <div class="section section-search">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 ml-auto">
+                        <div class="input-group">
+                <input type="search" class="form-control search-control" placeholder="Поиск среди товаров">
+              </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
     <div class="section">
         <div class="container">
-            <h2 class="section-title">Find what you need</h2>
             <div class="row">
                 <div class="col-md-3">
                     <div class="collapse-panel">
                         <div class="card-body">
-                            <div class="card card-refine card-plain">
-                                <h4 class="card-title">
-                                    Refine
-                                    <button class="btn btn-default btn-icon btn-neutral pull-right" rel="tooltip" title="Reset Filter">
-                                        <i class="arrows-1_refresh-69 now-ui-icons"></i>
-                                    </button>
-                                </h4>
-                           <div class="card-header" role="tab" id="headingOne">
-                             <h6 class="mb-0">
-                               <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                 Price Range
 
-                                 <i class="now-ui-icons arrows-1_minimal-down"></i>
-                               </a>
-                           </h6>
-                           </div>
-
-                           <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                             <div class="card-body">
-                                 <span id="price-left" class="price-left pull-left" data-currency="&euro;">100</span>
-                                 <span id="price-right" class="price-right pull-right" data-currency="&euro;">850</span>
-                                 <div class="clearfix"></div>
-                                 <div id="sliderRefine" class="slider slider-refine"></div>
-                             </div>
-                           </div>
-                         </div>
-                         <div class="card card-refine card-plain">
+                          @foreach ($categories as $category)
+                          @if($category->level == 1)
+                          <div class="card card-refine card-plain">
                            <div class="card-header" role="tab" id="headingTwo">
                              <h6 class="mb-0">
-                                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                     Clothing
+                                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $category->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                                     {{ $category->title }}
 
                                      <i class="now-ui-icons arrows-1_minimal-down"></i>
                                    </a>
                                </h6>
                            </div>
-                           <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+
+                           <div id="collapse-{{ $category->id }}" class="collapse" role="tabpanel" aria-labelledby="heading-{{ $category->id }}">
                              <div class="card-body">
-                                     <div class="checkbox">
-                                       <input id="checkbox1" type="checkbox" checked="">
-                                      <label for="checkbox1">
-                                          Blazers
-                                      </label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                  <input id="checkbox2" type="checkbox">
-                                  <label for="checkbox2">
-                                     Casual Shirts
-                                  </label>
-                                </div>
-
-                                <div class="checkbox">
-                                  <input id="checkbox3" type="checkbox">
-                                  <label for="checkbox3">
-                                      Formal Shirts
-                                  </label>
-                                </div>
-
-                                <div class="checkbox">
-                                  <input id="checkbox4" type="checkbox">
-                                  <label for="checkbox4">
-                                      Jeans
-                                  </label>
-                                </div>
-
-                                <div class="checkbox">
-                                  <input id="checkbox5" type="checkbox">
-                                  <label for="checkbox5">
-                                      Polos
-                                  </label>
-                                </div>
-
-                                <div class="checkbox">
-                                 <input id="checkbox6" type="checkbox">
-                                 <label for="checkbox6">
-                                     Pijamas
-                                 </label>
-                               </div>
-
-                               <div class="checkbox">
-                                 <input id="checkbox7" type="checkbox">
-                                 <label for="checkbox7">
-                                     Shorts
-                                 </label>
-                               </div>
-
-                               <div class="checkbox">
-                                <input id="checkbox8" type="checkbox">
-                                <label for="checkbox8">
-                                    Trousers
-                                </label>
-                              </div>
+                              @foreach ($categories as $subcategory)
+                              @if($subcategory->level == 2) 
+                                @if($subcategory->parent == $category->id)
+                                <p>
+                                     <a class="catalog-item">{{ $subcategory->title }}</a>
+                                 </p>
+                                 @endif
+                               @endif
+                              @endforeach
                              </div>
                            </div>
                          </div>
-                         <div class="card card-refine card-plain">
-                           <div class="card-header" role="tab" id="headingThree">
-                             <h6 class="mb-0">
-                               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                 Designer
+                         @endif
+                      @endforeach
 
-                                 <i class="now-ui-icons arrows-1_minimal-down"></i>
-                               </a>
-                           </h6>
-                           </div>
-                           <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-                             <div class="card-body">
-                                 <div class="checkbox">
-                                  <input id="checkbox9" type="checkbox">
-                                  <label for="checkbox9">
-                                      All
-                                  </label>
-                                </div>
-                                <div class="checkbox">
-                                 <input id="checkbox10" type="checkbox">
-                                 <label for="checkbox10">
-                                     Polo Ralph Lauren
-                                 </label>
-                               </div>
-
-                               <div class="checkbox">
-                                <input id="checkbox11" type="checkbox">
-                                <label for="checkbox11">
-                                    Wooyoungmi
-                                </label>
-                              </div>
-
-                              <div class="checkbox">
-                                <input id="checkbox12" type="checkbox">
-                                <label for="checkbox12">
-                                    Alexander McQueen
-                                </label>
-                              </div>
-                              <div class="checkbox">
-                               <input id="checkbox13" type="checkbox">
-                               <label for="checkbox13">
-                                   Tom Ford
-                               </label>
-                             </div>
-
-                             <div class="checkbox">
-                               <input id="checkbox14" type="checkbox">
-                               <label for="checkbox14">
-                                   AMI
-                               </label>
-                             </div>
-
-                             <div class="checkbox">
-                              <input id="checkbox15" type="checkbox">
-                              <label for="checkbox15">
-                                  Berena
-                              </label>
-                            </div>
-
-                            <div class="checkbox">
-                              <input id="checkbox16" type="checkbox">
-                              <label for="checkbox16">
-                                  Thom Sweeney
-                              </label>
-                            </div>
-
-                            <div class="checkbox">
-                              <input id="checkbox17" type="checkbox">
-                              <label for="checkbox17">
-                                  Burberry Prorsum
-                              </label>
-                            </div>
-
-                            <div class="checkbox">
-                              <input id="checkbox18" type="checkbox">
-                              <label for="checkbox18">
-                                  Calvin Klein
-                              </label>
-                            </div>
-
-                            <div class="checkbox">
-                              <input id="checkbox19" type="checkbox">
-                              <label for="checkbox19">
-                                  Kingsman
-                              </label>
-                            </div>
-
-                            <div class="checkbox">
-                             <input id="checkbox20" type="checkbox">
-                             <label for="checkbox20">
-                                 Club Monaco
-                             </label>
-                           </div>
-
-                           <div class="checkbox">
-                            <input id="checkbox21" type="checkbox">
-                            <label for="checkbox21">
-                                Dolce & Gabbana
-                            </label>
-                          </div>
-
-                          <div class="checkbox">
-                            <input id="checkbox22" type="checkbox">
-                            <label for="checkbox22">
-                                Gucci
-                            </label>
-                          </div>
-
-                          <div class="checkbox">
-                           <input id="checkbox23" type="checkbox">
-                           <label for="checkbox23">
-                               Biglioli
-                           </label>
-                         </div>
-
-                         <div class="checkbox">
-                          <input id="checkbox24" type="checkbox">
-                          <label for="checkbox24">
-                             Lanvin
-                          </label>
-                        </div>
-
-                        <div class="checkbox">
-                         <input id="checkbox25" type="checkbox">
-                         <label for="checkbox25">
-                             Loro Piana
-                         </label>
-                       </div>
-
-                       <div class="checkbox">
-                        <input id="checkbox26" type="checkbox">
-                        <label for="checkbox26">
-                            Massimo Alba
-                        </label>
-                      </div>
-                             </div>
-                           </div>
-                         </div>
-                         <div class="card card-refine card-plain">
-                           <div class="card-header" role="tab" id="headingfour">
-                             <h6 class="mb-0">
-                               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
-                                 Colour
-
-                                 <i class="now-ui-icons arrows-1_minimal-down"></i>
-                               </a>
-                           </h6>
-                           </div>
-                           <div id="collapsefour" class="collapse" role="tabpanel" aria-labelledby="headingfour">
-                             <div class="card-body">
-                                 <div class="checkbox">
-                                  <input id="checkbox27" type="checkbox">
-                                  <label for="checkbox27">
-                                      All
-                                  </label>
-                                </div>
-                                <div class="checkbox">
-                                 <input id="checkbox28" type="checkbox">
-                                 <label for="checkbox28">
-                                     Black
-                                 </label>
-                               </div>
-
-                               <div class="checkbox">
-                                <input id="checkbox29" type="checkbox">
-                                <label for="checkbox29">
-                                    Blue
-                                </label>
-                              </div>
-
-                              <div class="checkbox">
-                               <input id="checkbox30" type="checkbox">
-                               <label for="checkbox30">
-                                   Brown
-                               </label>
-                             </div>
-
-                             <div class="checkbox">
-                               <input id="checkbox31" type="checkbox">
-                               <label for="checkbox31">
-                                   Gray
-                               </label>
-                             </div>
-
-                             <div class="checkbox">
-                               <input id="checkbox32" type="checkbox">
-                               <label for="checkbox32">
-                                   Green
-                               </label>
-                             </div>
-
-                             <div class="checkbox">
-                                <input id="checkbox33" type="checkbox">
-                                <label for="checkbox33">
-                                    Neutrals
-                                </label>
-                              </div>
-
-                              <div class="checkbox">
-                                 <input id="checkbox34" type="checkbox">
-                                 <label for="checkbox34">
-                                     Purple
-                                 </label>
-                               </div>
-                             </div>
-                           </div>
-                         </div>
-                        </div>
-                    </div>
                 </div>
+              </div>
+            </div>
 
                 <div class="col-md-9">
+                    <div class="section" id="carousel">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class=""></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2" class="active"></li>
+              </ol>
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item">
+                      <img class="d-block" src="assets/img/bg1.jpg" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Nature, United States</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                      <img class="d-block" src="assets/img/bg3.jpg" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block">
+                    <h5>Somewhere Beyond, United States</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item active">
+                      <img class="d-block" src="assets/img/bg4.jpg" alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Yellowstone National Park, United States</h5>
+                    </div>
+                  </div>
+              </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <i class="now-ui-icons arrows-1_minimal-left"></i>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <i class="now-ui-icons arrows-1_minimal-right"></i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
                     <div class="row">
-                         <div class="col-lg-4 col-md-6">
+
+                      @foreach($top_products as $top_product)
+                          <div class="col-lg-4 col-md-6">
                              <div class="card card-product card-plain">
                                  <div class="card-image">
                                      <a href="#">
-                                         <img src="../assets/img/polo.jpg" alt="..."/>
+                                         <img src="{{ $top_product->image_small }}" alt="..."/>
                                      </a>
                                  </div>
                                  <div class="card-body">
                                      <a href="#">
-                                         <h4 class="card-title">Polo Ralph Lauren</h4>
+                                         <h4 class="card-title">{{ $top_product->name }}</h4>
                                      </a>
-                                     <p class="card-description">
-                                        Impeccably tailored in Italy from lightweight navy wool.
-                                     </p>
                                      <div class="card-footer">
                                          <div class="price-container">
-                                            <span class="price"> &euro; 300</span>
+                                            <span class="price"><i class="fa fa-ruble"> {{ $top_product->price_cost }}</i></span>
                                          </div>
 
-                                         <button class="btn btn-danger btn-neutral btn-icon btn-round pull-right" rel="tooltip" title="Remove from wishlist" data-placement="left">
-                                             <i class="now-ui-icons ui-2_favourite-28"></i>
-                                         </button>
-                                     </div>
-                                 </div>
-                             </div> <!-- end card -->
-                          </div>
-
-                          <div class="col-lg-4 col-md-6">
-                            <div class="card card-product card-plain">
-                                <div class="card-image">
-                                    <a href="#">
-                                        <img src="../assets/img/tom-ford.jpg" alt="..."/>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <a href="#">
-                                        <h4 class="card-title">Tom Ford</h4>
-                                    </a>
-                                    <p class="card-description">
-                                       Immaculate tailoring is TOM FORD's forte.
-                                   </p>
-                                    <div class="card-footer">
-                                        <div class="price-container">
-                                            <span class="price"> &euro; 879</span>
-                                        </div>
-
-                                        <button class="btn btn-neutral btn-icon btn-round pull-right"  rel="tooltip" title="Add to wishlist" data-placement="left">
-                                            <i class="now-ui-icons ui-2_favourite-28"></i>
+                                        <button class="btn btn-primary btn-icon pull-right"  rel="tooltip" title="Добавить в корзину" data-placement="left">
+                                            <i class="fa fa-shopping-cart"></i>
                                         </button>
-                                    </div>
-                                </div>
-                            </div> <!-- end card -->
-                         </div>
-                          <div class="col-lg-4 col-md-6">
-                             <div class="card card-product card-plain">
-                                 <div class="card-image">
-                                     <a href="#">
-                                         <img src="../assets/img/wooyoungmi.jpg" alt="..."/>
-                                     </a>
-                                 </div>
-                                 <div class="card-body">
-                                     <a href="#">
-                                         <h4 class="card-title">Wooyoungmi</h4>
-                                     </a>
-                                     <p class="card-description">
-                                         Dark-grey slub wool, pintucked notch lapels.
-                                     </p>
-                                     <div class="card-footer">
-                                         <div class="price-container">
-                                            <span class="price">&euro; 555</span>
-                                         </div>
-
-                                         <button class="btn btn-neutral btn-icon btn-round pull-right" rel="tooltip" title="Add to wishlist" data-placement="left">
-                                             <i class="now-ui-icons ui-2_favourite-28"></i>
-                                         </button>
                                      </div>
                                  </div>
                              </div> <!-- end card -->
                           </div>
+                      @endforeach
 
-
-                           <div class="col-lg-4 col-md-6">
-                             <div class="card card-product card-plain">
-                                 <div class="card-image">
-                                     <a href="#">
-                                         <img src="../assets/img/sweeney.jpg" alt="..."/>
-                                     </a>
-                                 </div>
-                                 <div class="card-body">
-                                     <a href="#">
-                                         <h4 class="card-title">Thom Sweeney</h4>
-                                     </a>
-                                     <p class="card-description">
-                                        It's made from lightweight grey wool woven.
-                                   </p>
-                                     <div class="card-footer">
-                                         <div class="price-container">
-                                            <span class="price"> &euro; 680</span>
-                                         </div>
-
-                                         <button class="btn btn-neutral btn-icon btn-round pull-right"  rel="tooltip" title="Add to wishlist" data-placement="left">
-                                             <i class="now-ui-icons ui-2_favourite-28"></i>
-                                         </button>
-                                     </div>
-                                 </div>
-                             </div> <!-- end card -->
-                          </div>
-
-                          <div class="col-lg-4 col-md-6">
-                             <div class="card card-product card-plain">
-                                 <div class="card-image">
-                                     <a href="#">
-                                         <img src="../assets/img/kingsman.jpg" alt="..."/>
-                                     </a>
-                                 </div>
-                                 <div class="card-body">
-                                     <a href="#">
-                                         <h4 class="card-title">Kingsman</h4>
-                                     </a>
-                                     <p class="card-description">
-                                        Crafted from khaki cotton and fully canvassed.
-                                     </p>
-                                     <div class="card-footer">
-                                         <div class="price-container">
-                                             <span class="price"> &euro; 725</span>
-                                         </div>
-
-                                         <button class="btn btn-neutral btn-icon btn-round pull-right" rel="tooltip" title="Remove from wishlist" data-placement="left">
-                                             <i class="now-ui-icons ui-2_favourite-28"></i>
-                                         </button>
-                                     </div>
-                                 </div>
-                             </div> <!-- end card -->
-                          </div>
-                          <div class="col-lg-4 col-md-6">
-                             <div class="card card-product card-plain">
-                                 <div class="card-image">
-                                     <a href="#">
-                                         <img src="../assets/img/boglioli.jpg" alt="..."/>
-                                     </a>
-                                 </div>
-                                 <div class="card-body">
-                                     <a href="#">
-                                         <h4 class="card-title">Boglioli</h4>
-                                     </a>
-                                     <p class="card-description">
-                                        Masterfully crafted in Northern Italy.
-                                     </p>
-                                     <div class="card-footer">
-                                         <div class="price-container">
-                                            <span class="price">&euro; 699</span>
-                                         </div>
-
-                                         <button class="btn btn-neutral btn-icon btn-round pull-right" rel="tooltip" title="Add to wishlist" data-placement="left">
-                                             <i class="now-ui-icons ui-2_favourite-28"></i>
-                                         </button>
-                                     </div>
-                                 </div>
-                             </div> <!-- end card -->
-                          </div>
                           <div class="col-md-3 ml-auto mr-auto">
-                               <button rel="tooltip" class="btn btn-primary btn-round">Load more...</button>
+                               <button rel="tooltip" class="btn btn-primary">Все популярные товары</button>
                           </div>
                     </div>
                 </div>

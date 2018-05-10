@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [
+	'uses' => 'SiteController@showMainPage',
+	'as' => 'site.show-main-page.get'
+]);
