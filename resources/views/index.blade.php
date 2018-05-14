@@ -72,7 +72,7 @@
                               @if($subcategory->level == 2) 
                                 @if($subcategory->parent == $category->id)
                                 <p>
-                                     <a class="catalog-item">{{ $subcategory->title }}</a>
+                                     <a class="catalog-item" href="{{ route('site.show-subcategories-page.get',['subcategory_id' => $subcategory->id]) }}">{{ $subcategory->title }}</a>
                                  </p>
                                  @endif
                                @endif
@@ -168,206 +168,41 @@
 </div>
     </div><!-- section -->
 
-    <div class="container">
-        <h2 class="section-title">News in fashion</h2>
-    </div>
-    <div class="projects-4" >
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 px-0">
-                    <div class="card card-fashion card-background" style="background-image: url('../assets/img/bg35.jpg')">
-                        <div class="card-body">
-                            <div class="card-title text-left">
-                                <h2>
-                                    <a href="#pablo">
-                                        The New York Times Todd Snyder and Raf Simons Party During Men’s Fashion Week
-                                    </a>
-                                </h2>
-                            </div>
-
-                            <div class="card-footer text-left">
-                                <div class="stats">
-                                    <span>
-                                        <i class="now-ui-icons users_circle-08"></i>Emy Grace
-                                    </span>
-
-                                    <span>
-                                        <i class="now-ui-icons tech_watch-time"></i> June 6, 2017
-                                    </span>
-                                </div>
-
-                                <div class="stats-link pull-right">
-                                    <a href="#pablo" class="footer-link">Fashion Week</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 px-0">
-                    <div class="card-container">
-                        <div class="card card-fashion">
-                            <div class="card-title">
-                                <a href="#pablo">
-                                    </a><h4><a href="#pablo">
-                                        </a><a href="#pablo">
-                                            Valentina Garavani Holds a Summer Lunch in Honor of Sofia Coppola...
-                                        </a>
-                                    </h4>
-
-                            </div>
-                            <div class="card-body">
-                                <div class="card-footer text-left">
-                                    <div class="stats">
-                                        <span>
-                                            <i class="now-ui-icons users_circle-08"></i>Jerry McGregor
-                                        </span>
-
-                                        <span>
-                                            <i class="now-ui-icons tech_watch-time"></i> June 10, 2017
-                                        </span>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-fashion card-background" style="background-image: url('../assets/img/bg40.jpg')">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="section">
            <div class="container">
-               <h2 class="section-title">Latest Offers</h2>
+               <h2 class="section-title">Спецпредложения</h2>
                <div class="row">
+                @foreach($spec_products as $spec_product)
                     <div class="col-md-4">
 
                         <div class="card card-product card-plain">
                             <div class="card-image">
-                                <img class="img rounded" src="../assets/img/saint-laurent1.jpg"/>
+                                <img class="img rounded" src="{{ $spec_product->image_small }}"/>
                             </div>
 
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#pablo">Saint Laurent</a>
+                                    <a href="#pablo">{{ $spec_product->name }}</a>
                                 </h4>
-                                <p class="card-description">The structured shoulders and sleek detailing ensure a sharp silhouette. Team it with a silk pocket square and leather loafers.</p>
                                 <div class="card-footer">
                                     <div class="price-container">
-                                        <span class="price price-old"> &euro;1,430</span>
-                                        <span class="price price-new"> &euro;743</span>
+                                        <span class="price price-old"> <i class="fa fa-ruble"></i> {{ $spec_product->price_without_discount }}</span>
+                                        <span class="price price-new"> <i class="fa fa-ruble"></i> {{ $spec_product->price }}</span>
                                     </div>
                                     <div class="stats stats-right">
-                                        <button type="button" rel="tooltip" title="" class="btn btn-icon btn-neutral" data-original-title="Saved to Wishlist">
-                                           <i class="now-ui-icons ui-2_favourite-28"></i>
+                                        <button type="button" rel="tooltip" title="" class="btn btn-icon btn-neutral" data-original-title="Добавить в список желаемого">
+                                           <i class="fa fa-heart"></i>
                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-4">
-
-                        <div class="card card-product card-plain">
-                            <div class="card-image">
-                                <img class="img rounded" src="../assets/img/saint-laurent.jpg"/>
-                            </div>
-
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <h4 class="card-title">Saint Laurent</h4>
-                                </h4>
-                                <p class="card-description">The structured shoulders and sleek detailing ensure a sharp silhouette. Team it with a silk pocket square and leather loafers.</p>
-                                <div class="card-footer">
-                                    <div class="price-container">
-                                        <span class="price price-old"> &euro;1,430</span>
-                                        <span class="price price-new">&euro;743</span>
-                                    </div>
-                                    <div class="stats stats-right">
-                                        <button type="button" rel="tooltip" title="" class="btn btn-icon btn-neutral" data-original-title="Saved to Wishlist">
-                                            <i class="now-ui-icons ui-2_favourite-28"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-4">
-
-                        <div class="card card-product card-plain">
-                            <div class="card-image">
-                                <img class="img rounded" src="../assets/img/gucci.jpg"/>
-                            </div>
-
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <h4 class="card-title">Gucci</h4>
-                                </h4>
-                                <p class="card-description">The smooth woven-wool is water resistant to ensure you stay pristine after a long-haul flight. Cut in a trim yet comfortable regular fit.</p>
-                                <div class="card-footer">
-                                    <div class="price-container">
-                                        <span class="price price-old"> &euro;2,430</span>
-                                        <span class="price price-new">&euro;890</span>
-                                    </div>
-                                    <div class="stats stats-right">
-                                        <button type="button" rel="tooltip" title="" class="btn btn-icon btn-neutral btn-default" data-original-title="Add to Wishlist">
-                                           <i class="now-ui-icons ui-2_favourite-28"></i>
-                                       </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
+                @endforeach
                </div>
            </div>
     </div><!-- section -->
-
-
-    <div class="subscribe-line subscribe-line-image" style="background-image: url('../assets/img/bg43.jpg');">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 ml-auto mr-auto">
-                    <div class="text-center">
-                        <h4 class="title">Subscribe to our Newsletter</h4>
-                        <p class="description">
-                            Join our newsletter and get news in your inbox every week! We hate spam too, so no worries about this.
-                        </p>
-                    </div>
-
-                    <div class="card card-raised card-form-horizontal">
-                        <div class="card-body">
-                            <form method="" action="">
-                                <div class="row">
-                                    <div class="col-sm-8">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Email Here...">
-                      </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <button type="button" class="btn btn-primary btn-block">Subscribe</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div> <!-- end-main-raised -->
 @endsection

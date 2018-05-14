@@ -15,3 +15,8 @@ Route::get('/', [
 	'uses' => 'SiteController@showMainPage',
 	'as' => 'site.show-main-page.get'
 ]);
+
+Route::get('/subcategories/{subcategory_id}', [
+	'uses' => 'SiteController@showSubcategoriesPage',
+	'as' => 'site.show-subcategories-page.get'
+]);

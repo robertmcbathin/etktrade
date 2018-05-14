@@ -18,3 +18,7 @@
 input[type="search"]::placeholder{
 	color: #888888;
 }
+.page-header.page-header-xs {
+    min-height: 20vh;
+    max-height: 300px;
+}
