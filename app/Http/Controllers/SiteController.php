@@ -14,7 +14,7 @@ class SiteController extends Controller
     						->limit(6)
     						->get();
         $spec_products = DB::table('ETKTRADE_GOODS')
-                            ->where('is_spec',1)
+                            ->whereNotNull('price_without_discount')
                             ->limit(3)
                             ->get();
     	return view('index',[
@@ -52,5 +52,14 @@ class SiteController extends Controller
             'subcategories' => $subcategories,
             'products' => $products
         ]);        
+    }
+
+    public function showProductPage($product_id){
+        $product = DB::table('ETKTRADE_GOODS')
+                    ->where('id',$product_id)
+                    ->first();
+        return view('pages.product',[
+            'product' => $product
+        ]);
     }
 }

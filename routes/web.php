@@ -20,3 +20,8 @@ Route::get('/subcategories/{subcategory_id}', [
 	'uses' => 'SiteController@showSubcategoriesPage',
 	'as' => 'site.show-subcategories-page.get'
 ]);
+
+Route::get('/product/{product_id}', [
+	'uses' => 'SiteController@showProductPage',
+	'as' => 'site.show-product-page.get'
+]);
