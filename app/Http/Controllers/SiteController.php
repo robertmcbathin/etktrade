@@ -10,10 +10,10 @@ class SiteController extends Controller
     public function showMainPage(){
     	$categories = DB::table('ETKTRADE_CATEGORIES')
     					->get();
-    	$top_products = DB::table('ETKTRADE_GOODS')
+    	$top_products = DB::table('ETKTRADE_PRODUCTS')
     						->limit(6)
     						->get();
-        $spec_products = DB::table('ETKTRADE_GOODS')
+        $spec_products = DB::table('ETKTRADE_PRODUCTS')
                             ->whereNotNull('price_without_discount')
                             ->limit(3)
                             ->get();
@@ -43,7 +43,7 @@ class SiteController extends Controller
         foreach ($subcategories as $subcategory) {
             $cat_list[] = $subcategory->id;
         }
-        $products = DB::table('ETKTRADE_GOODS')
+        $products = DB::table('ETKTRADE_PRODUCTS')
                         ->whereIn('category_id',$cat_list)
                         ->paginate(25);
         return view('pages.subcategories',[
@@ -55,8 +55,10 @@ class SiteController extends Controller
     }
 
     public function showProductPage($product_id){
-        $product = DB::table('ETKTRADE_GOODS')
-                    ->where('id',$product_id)
+        $product = DB::table('ETKTRADE_PRODUCTS')
+                    ->leftJoin('ETKTRADE_CATEGORIES', 'ETKTRADE_CATEGORIES.id', '=', 'ETKTRADE_PRODUCTS.category_id')
+                    ->where('ETKTRADE_PRODUCTS.id',$product_id)
+                    ->select('ETKTRADE_PRODUCTS.*', 'ETKTRADE_CATEGORIES.title as category')
                     ->first();
         return view('pages.product',[
             'product' => $product

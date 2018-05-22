@@ -30,7 +30,7 @@
 
 </head>
 
-<body>
+<body class="@yield('body-class')">
 
 	@include('includes.top_nav')
 	<div class="wrapper">
