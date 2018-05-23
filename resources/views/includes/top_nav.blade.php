@@ -4,7 +4,7 @@
 		
 
 		<div class="navbar-translate">
-			<a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit-pro/presentation.html" rel="tooltip" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" target="_blank">
+			<a class="navbar-brand" href="/">
 				ЕТК Трейд
 			</a>
 

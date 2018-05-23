@@ -105,11 +105,11 @@
       @endforeach
 
    </div>
-                 <div class="row">
-                            <div class="text-center">
+          <div class="row">
+            <div class="text-center">
                 <?php echo $products->links(); ?>
             </div>
-              </div>
+          </div>
  </div>
 </div>
 </div>
