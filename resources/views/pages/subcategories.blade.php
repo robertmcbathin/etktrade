@@ -80,14 +80,14 @@
 
         @foreach($products as $product)
         <div class="col-lg-4 col-md-6">
-         <div class="card card-product card-plain">
+         <div class="card card-product">
            <div class="card-image">
-             <a href="#">
+             <a href="{{ route('site.show-product-page.get',[ 'product_id' => $product->id ]) }}">
                <img src="{{ $product->image_small }}" alt="..."/>
              </a>
            </div>
            <div class="card-body">
-             <a href="#">
+             <a href="{{ route('site.show-product-page.get',[ 'product_id' => $product->id ]) }}">
                <h4 class="card-title">{{ $product->name }}</h4>
              </a>
              <div class="card-footer">
