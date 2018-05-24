@@ -32,19 +32,20 @@ product-page
 
                 <div id="productCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
                     <ol class="carousel-indicators">
-                        <li data-target="#productCarousel" data-slide-to="0" class=""></li>
+                        <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
+
                         <li data-target="#productCarousel" data-slide-to="1" class=""></li>
-                        <li data-target="#productCarousel" data-slide-to="2" class="active"></li>
+                        <li data-target="#productCarousel" data-slide-to="2" class=""></li>
                         <li data-target="#productCarousel" data-slide-to="3"></li>
                     </ol>
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item">
-                            <img class="d-block img-raised" src="../assets/img/pp-1.jpg" alt="First slide">
+                        <div class="carousel-item active">
+                            <img class="d-block img-raised" src="{{ $product->image }}" alt="{{ $product->name }}">
                         </div>
                         <div class="carousel-item">
                             <img class="d-block img-raised" src="../assets/img/pp-2.jpg" alt="Second slide">
                         </div>
-                        <div class="carousel-item active">
+                        <div class="carousel-item">
                             <img class="d-block img-raised" src="../assets/img/pp-3.jpg" alt="Third slide">
                         </div>
                         <div class="carousel-item">
