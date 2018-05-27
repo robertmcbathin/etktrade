@@ -31,7 +31,12 @@ class SiteController extends Controller
         $category = DB::table('ETKTRADE_CATEGORIES')
                         ->where('id',$subcategory_id)
                         ->first();
-
+        $parent_category = DB::table('ETKTRADE_CATEGORIES')
+                    ->where('id',$category->parent)
+                    ->first();
+        $grandparent_category = DB::table('ETKTRADE_CATEGORIES')
+                                    ->where('id',$parent_category->parent)
+                                    ->first();
         $subcategories = DB::table('ETKTRADE_CATEGORIES')
                             ->where('parent',$subcategory_id)
                             ->get();
@@ -49,6 +54,8 @@ class SiteController extends Controller
         return view('pages.subcategories',[
             'meta' => $meta,
             'category' => $category,
+            'parent_category' => $parent_category,
+            'grandparent_category' => $grandparent_category,
             'subcategories' => $subcategories,
             'products' => $products
         ]);        

@@ -35,9 +35,6 @@
         
 </div>
 <div class="main">
-
-
-
   <div class="section">
     <div class="container">
       <div class="row">
@@ -76,6 +73,9 @@
      </div>
 
      <div class="col-md-9">
+      <div class="row">
+        <span><a class="btn btn-link btn-info">{{ $parent_category->title }}</a> / <a class="btn btn-link btn-info">{{ $category->title }}</a></span>
+      </div>
       <div class="row">
 
         @foreach($products as $product)
