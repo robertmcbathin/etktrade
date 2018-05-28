@@ -22,3 +22,10 @@ input[type="search"]::placeholder{
     min-height: 20vh;
     max-height: 300px;
 }
+.product-discount .price {
+  color: #888888; }
+.product-discount .price-old {
+  text-decoration: line-through;
+  color: #888888; }
+.product-discount .price-new {
+  color: #FF3636; }

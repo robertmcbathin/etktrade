@@ -23,7 +23,30 @@ class SiteController extends Controller
             'spec_products' => $spec_products
     	]);
     }
-
+    /**
+     * КАТЕГОРИИ УРОВНЯ 1
+     * 
+     */
+    public function showCategoriesPage($category_id){
+        $meta = DB::table('ETKTRADE_CATEGORIES')
+                    ->where('id',$category_id)
+                    ->first(); 
+        $category = DB::table('ETKTRADE_CATEGORIES')
+                        ->where('id',$category_id)
+                        ->first();    
+        $subcategories = DB::table('ETKTRADE_CATEGORIES')
+                            ->where('parent',$category_id)
+                            ->get();            
+        return view('pages.categories',[
+            'meta' => $meta,
+            'category' => $category,
+            'subcategories' => $subcategories
+        ]);
+    }
+    /**
+     * КАТЕГОРИИ УРОВНЯ 2
+     * 
+     */
     public function showSubcategoriesPage($subcategory_id){
         $meta = DB::table('ETKTRADE_CATEGORIES')
                     ->where('id',$subcategory_id)
@@ -50,7 +73,7 @@ class SiteController extends Controller
         }
         $products = DB::table('ETKTRADE_PRODUCTS')
                         ->whereIn('category_id',$cat_list)
-                        ->paginate(25);
+                        ->paginate(24);
         return view('pages.subcategories',[
             'meta' => $meta,
             'category' => $category,
@@ -60,6 +83,51 @@ class SiteController extends Controller
             'products' => $products
         ]);        
     }
+    /**
+     * КАТЕГОРИИ УРОВНЯ 3
+     * ЗДЕСЬ БУДУТ ОТОБРАЖАТЬСЯ АТТРИБУТЫ ДЛЯ СОРТИРОВКИ
+     */
+    public function showStockPage($stock_id){
+        $meta = DB::table('ETKTRADE_CATEGORIES')
+                    ->where('id',$stock_id)
+                    ->first();
+        $category = DB::table('ETKTRADE_CATEGORIES')
+                        ->where('id',$stock_id)
+                        ->first();
+        $products = DB::table('ETKTRADE_PRODUCTS')
+                        ->where('category_id',$stock_id)
+                        ->paginate(24);
+        $parent_category = DB::table('ETKTRADE_CATEGORIES')
+                    ->where('id',$category->parent)
+                    ->first();
+        $grandparent_category = DB::table('ETKTRADE_CATEGORIES')
+                                    ->where('id',$parent_category->parent)
+                                    ->first();
+        $attributes = DB::table('ETKTRADE_ATTRIBUTES')
+                            ->where('category_id',$stock_id)
+                            ->get();
+
+        $product_list = [];
+        foreach($products as $product){
+            $product_list[] = $product->id;
+        }
+        $product_attributes = DB::table('ETKTRADE_PRODUCT_ATTRIBUTES')
+                        ->join('ETKTRADE_ATTRIBUTES','ETKTRADE_ATTRIBUTES.id','=','ETKTRADE_PRODUCT_ATTRIBUTES.attribute_id')
+                        ->whereIn('ETKTRADE_PRODUCT_ATTRIBUTES.product_id',$product_list)
+                        ->selectRaw('ETKTRADE_PRODUCT_ATTRIBUTES.value, count(ETKTRADE_PRODUCT_ATTRIBUTES.value) as attr_count, ETKTRADE_PRODUCT_ATTRIBUTES.attribute_id, ETKTRADE_ATTRIBUTES.type')
+                       // ->select('ETKTRADE_PRODUCT_ATTRIBUTES.*','ETKTRADE_ATTRIBUTES.title as title','ETKTRADE_ATTRIBUTES.unit as unit','ETKTRADE_ATTRIBUTES.type as type', DB::raw('count(ETKTRADE_PRODUCT_ATTRIBUTES.value) as value_count'))
+                        ->groupBy('ETKTRADE_PRODUCT_ATTRIBUTES.value','ETKTRADE_PRODUCT_ATTRIBUTES.attribute_id', 'ETKTRADE_ATTRIBUTES.type')
+                        ->get();
+        return view('pages.stock',[
+            'meta' => $meta,
+            'category' => $category,
+            'products' => $products,
+            'parent_category' => $parent_category,
+            'grandparent_category' => $grandparent_category,
+            'attributes' => $attributes,
+            'product_attributes' => $product_attributes,
+        ]);
+    } 
 
     public function showProductPage($product_id){
         $product = DB::table('ETKTRADE_PRODUCTS')
@@ -67,8 +135,14 @@ class SiteController extends Controller
                     ->where('ETKTRADE_PRODUCTS.id',$product_id)
                     ->select('ETKTRADE_PRODUCTS.*', 'ETKTRADE_CATEGORIES.title as category')
                     ->first();
+        $attributes = DB::table('ETKTRADE_PRODUCT_ATTRIBUTES')
+                        ->join('ETKTRADE_ATTRIBUTES','ETKTRADE_ATTRIBUTES.id','=','ETKTRADE_PRODUCT_ATTRIBUTES.attribute_id')
+                        ->where('product_id',$product->id)
+                        ->select('ETKTRADE_PRODUCT_ATTRIBUTES.*','ETKTRADE_ATTRIBUTES.title as title','ETKTRADE_ATTRIBUTES.unit as unit')
+                        ->get();
         return view('pages.product',[
-            'product' => $product
+            'product' => $product,
+            'attributes' => $attributes
         ]);
     }
 }

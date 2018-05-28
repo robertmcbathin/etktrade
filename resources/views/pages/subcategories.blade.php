@@ -23,7 +23,7 @@
   </div>
   <div class="page-header page-header-xs">
 
-    <div class="page-header-image" data-parallax="true" style="background-image: url('/assets/img/pp-cov.jpg'); transform: translate3d(0px, 0px, 0px);">
+    <div class="page-header-image" data-parallax="true" style="background-image: url({{ $category->image }}); transform: translate3d(0px, 0px, 0px);">
     </div>
     <div class="content-center">
                 <div class="row">
@@ -59,7 +59,7 @@
                   @if($subcategory->level == 3) 
                   @if($subcategory->parent == $category->id)
                   <p>
-                   <a class="catalog-item">{{ $subcategory->title }}</a>
+                   <a class="catalog-item" href="{{ route('site.show-stock-page.get', ['stock_id' => $subcategory->id]) }}">{{ $subcategory->title }}</a>
                  </p>
                  @endif
                  @endif
@@ -74,7 +74,7 @@
 
      <div class="col-md-9">
       <div class="row">
-        <span><a class="btn btn-link btn-info">{{ $parent_category->title }}</a> / <a class="btn btn-link btn-info">{{ $category->title }}</a></span>
+        <span><a class="btn btn-link btn-danger" href="/">Главная</a> / <a class="btn btn-link btn-danger" href="{{ route('site.show-categories-page.get', ['category_id' => $category->parent]) }}">{{ $parent_category->title }}</a> / <a class="btn btn-link btn-info">{{ $category->title }}</a></span>
       </div>
       <div class="row">
 

@@ -16,9 +16,19 @@ Route::get('/', [
 	'as' => 'site.show-main-page.get'
 ]);
 
+Route::get('/categories/{category_id}', [
+	'uses' => 'SiteController@showCategoriesPage',
+	'as' => 'site.show-categories-page.get'
+]);
+
 Route::get('/subcategories/{subcategory_id}', [
 	'uses' => 'SiteController@showSubcategoriesPage',
 	'as' => 'site.show-subcategories-page.get'
+]);
+
+Route::get('/stock/{stock_id}', [
+	'uses' => 'SiteController@showStockPage',
+	'as' => 'site.show-stock-page.get'
 ]);
 
 Route::get('/product/{product_id}', [
