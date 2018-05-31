@@ -70,6 +70,39 @@
 
          </div>
        </div>
+
+       @isset($attributes)
+          @foreach($attributes as $attribute)
+              <div class="card card-refine card-plain">
+               <div class="card-header" role="tab" id="heading-{{ $attribute->id }}">
+                 <h6 class="mb-0">
+                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $attribute->id }}" aria-expanded="false" aria-controls="collapse-{{ $attribute->id }}">
+                     {{ $attribute->title }}
+
+                     <i class="now-ui-icons arrows-1_minimal-down"></i>
+                   </a>
+                 </h6>
+               </div>
+               <div id="collapse-{{ $attribute->id }}" class="collapse" role="tabpanel" aria-labelledby="heading-{{ $attribute->id }}" style="">
+                 <div class="card-body">
+                  @foreach($product_attributes as $product_attribute)
+                  @if($product_attribute->attribute_id == $attribute->id)
+                  <div class="checkbox">
+                   <input id="checkbox1" type="checkbox" checked="">
+                   <label for="checkbox1">
+                    {{ $product_attribute->value }} <span class="tag badge badge-primary">{{ $product_attribute->attr_count }}</span>
+                  </label>
+                </div>
+                @endif
+
+                @endforeach
+
+              </div>
+            </div>
+          </div>
+
+         @endforeach
+       @endisset
      </div>
 
      <div class="col-md-9">

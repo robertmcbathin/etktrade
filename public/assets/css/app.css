@@ -29,3 +29,7 @@ input[type="search"]::placeholder{
   color: #888888; }
 .product-discount .price-new {
   color: #FF3636; }
+.card-paddinged{
+	padding: 15px;
+	border-radius: 5px;
+}

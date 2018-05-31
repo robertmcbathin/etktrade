@@ -50,6 +50,48 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3">
+
+
+
+            <div class="collapse-panel">
+            <div class="card-body">
+
+              @foreach ($spec_categories as $spec_category)
+              @if($spec_category->level == 1)
+              <div class="card card-refine card-paddinged">
+               <div class="card-header" role="tab" id="headingTwo">
+                 <h6 class="mb-0">
+                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $spec_category->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                     {{ $spec_category->title }}
+
+                     <i class="now-ui-icons arrows-1_minimal-down"></i>
+                   </a>
+                 </h6>
+               </div>
+
+               <div id="collapse-{{ $spec_category->id }}" class="collapse" role="tabpanel" aria-labelledby="heading-{{ $spec_category->id }}">
+                 <div class="card-body">
+                  @foreach ($categories as $subcategory)
+                  @if($subcategory->level == 2) 
+                  @if($subcategory->parent == $spec_category->id)
+                  <p>
+                   <a class="catalog-item" href="{{ route('site.show-subcategories-page.get',['subcategory_id' => $subcategory->id]) }}">{{ $subcategory->title }}</a>
+                 </p>
+                 @endif
+                 @endif
+                 @endforeach
+               </div>
+             </div>
+           </div>
+           @endif
+           @endforeach
+
+         </div>
+       </div>
+
+
+
+
           <div class="collapse-panel">
             <div class="card-body">
 
@@ -85,6 +127,7 @@
 
          </div>
        </div>
+
      </div>
 
      <div class="col-md-9">
