@@ -41,28 +41,28 @@
         <div class="col-md-3">
           <div class="collapse-panel">
             <div class="card-body">
-              <button class="btn btn-default btn-icon btn-neutral pull-right" rel="tooltip" title="" data-original-title="Reset Filter">
+              <button class="btn btn-default btn-icon btn-neutral pull-right" rel="tooltip" title="" data-original-title="Сбросить фильтр">
                 <i class="arrows-1_refresh-69 now-ui-icons"></i>
               </button>
               @foreach($attributes as $attribute)
               <div class="card card-refine card-plain">
                <div class="card-header" role="tab" id="heading-{{ $attribute->id }}">
                  <h6 class="mb-0">
-                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $attribute->id }}" aria-expanded="false" aria-controls="collapse-{{ $attribute->id }}">
+                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $attribute->id }}" aria-expanded="true" aria-controls="collapse-{{ $attribute->id }}">
                      {{ $attribute->title }}
 
                      <i class="now-ui-icons arrows-1_minimal-down"></i>
                    </a>
                  </h6>
                </div>
-               <div id="collapse-{{ $attribute->id }}" class="collapse" role="tabpanel" aria-labelledby="heading-{{ $attribute->id }}" style="">
+               <div id="collapse-{{ $attribute->id }}" class="collapse show" role="tabpanel" aria-labelledby="heading-{{ $attribute->id }}" style="">
                  <div class="card-body">
                   @foreach($product_attributes as $product_attribute)
                   @if($product_attribute->attribute_id == $attribute->id)
                   <div class="checkbox">
-                   <input id="checkbox1" type="checkbox" checked="">
-                   <label for="checkbox1">
-                    {{ $product_attribute->value }} <span class="tag badge badge-primary">{{ $product_attribute->attr_count }}</span>
+                   <input id="checkbox-{{ $product_attribute->attribute_id }}" type="checkbox">
+                   <label for="checkbox-{{ $product_attribute->attribute_id }}">
+                    {{ $product_attribute->value }} <span class="tag badge badge-info">{{ $product_attribute->attr_count }}</span>
                   </label>
                 </div>
                 @endif
@@ -87,7 +87,7 @@
 
       @foreach($products as $product)
       <div class="col-lg-4 col-md-6">
-       <div class="card card-product">
+       <div class="card card-product card-plain">
          <div class="card-image">
            <a href="{{ route('site.show-product-page.get',[ 'product_id' => $product->id ]) }}">
              <img src="{{ $product->image_small }}" alt=""/>

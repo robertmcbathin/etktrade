@@ -3634,7 +3634,7 @@ body {
   cursor: pointer; }
 
 img {
-  max-width: 100%;
+  width: 100%;
   border-radius: 1px; }
 
 .img-raised {
@@ -4998,7 +4998,7 @@ Created using IcoMoon - icomoon.io
 .card-product .price-new {
   color: #FF3636; }
 .card-product:not(.card-plain) .card-image {
-  padding: 15px; }
+  padding: 0px; }
 
 .card-contact .header .title {
   margin: 10px 0 10px; }
