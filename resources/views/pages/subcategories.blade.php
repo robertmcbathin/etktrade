@@ -23,7 +23,7 @@
   </div>
   <div class="page-header page-header-xs">
 
-    <div class="page-header-image" data-parallax="true" style="background-image: url({{ $category->image }}); transform: translate3d(0px, 0px, 0px);">
+    <div class="page-header-image" data-parallax="true" style="background-image: url({{ $category->image }});-webkit-filter: blur(15px); filter: blur(15px); -moz-filter: blur(15px); -o-filter: blur(15px); transform: translate3d(0px, 0px, 0px);">
     </div>
     <div class="content-center">
                 <div class="row">
@@ -83,15 +83,16 @@
                    </a>
                  </h6>
                </div>
-               <div id="collapse-{{ $attribute->id }}" class="collapse" role="tabpanel" aria-labelledby="heading-{{ $attribute->id }}" style="">
+               <div id="collapse-{{ $attribute->id }}" class="collapse show" role="tabpanel" aria-labelledby="heading-{{ $attribute->id }}" style="">
                  <div class="card-body">
                   @foreach($product_attributes as $product_attribute)
                   @if($product_attribute->attribute_id == $attribute->id)
                   <div class="checkbox">
                    <input id="checkbox1" type="checkbox" checked="">
                    <label for="checkbox1">
-                    {{ $product_attribute->value }} <span class="tag badge badge-primary">{{ $product_attribute->attr_count }}</span>
+                    {{ $product_attribute->value }} 
                   </label>
+                  <span class="tag badge badge-default pull-right">{{ $product_attribute->attr_count }}</span>
                 </div>
                 @endif
 

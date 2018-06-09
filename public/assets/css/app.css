@@ -33,3 +33,6 @@ input[type="search"]::placeholder{
 	padding: 15px;
 	border-radius: 5px;
 }
+.badge{
+	border-radius: 0.1rem;
+}

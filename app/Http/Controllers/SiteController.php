@@ -78,6 +78,14 @@ class SiteController extends Controller
         foreach ($subcategories as $subcategory) {
             $cat_list[] = $subcategory->id;
         }
+        if($cat_list == []){
+            $subcategories = DB::table('ETKTRADE_CATEGORIES')
+                    ->where('id',$subcategory_id)
+                    ->get();
+        foreach ($subcategories as $subcategory) {
+            $cat_list[] = $subcategory->id;
+        }
+        }
         $products = DB::table('ETKTRADE_PRODUCTS')
                         ->whereIn('category_id',$cat_list)
                         ->paginate(24);

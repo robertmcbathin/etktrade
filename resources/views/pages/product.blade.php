@@ -14,7 +14,7 @@ product-page
 @section('content')
 <div class="page-header page-header-mini">
 
-    <div class="page-header-image" data-parallax="true" style="background-image: url({{ $product->image }}); transform: translate3d(0px, 0px, 0px);">
+    <div class="page-header-image" data-parallax="true" style="background-image: url({{ $product->image }}); transform: translate3d(0px, 0px, 0px); -webkit-filter: blur(15px); filter: blur(15px); -moz-filter: blur(15px); -o-filter: blur(15px);">
     </div>
     <div class="content-center">
         <div class="row">

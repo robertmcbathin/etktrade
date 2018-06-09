@@ -62,8 +62,9 @@
                   <div class="checkbox">
                    <input id="checkbox-{{ $product_attribute->attribute_id }}" type="checkbox">
                    <label for="checkbox-{{ $product_attribute->attribute_id }}">
-                    {{ $product_attribute->value }} <span class="tag badge badge-info">{{ $product_attribute->attr_count }}</span>
+                    {{ $product_attribute->value }} 
                   </label>
+                  <span class="tag badge badge-default pull-right">{{ $product_attribute->attr_count }}</span>
                 </div>
                 @endif
 
