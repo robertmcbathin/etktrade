@@ -36,3 +36,14 @@ input[type="search"]::placeholder{
 .badge{
 	border-radius: 0.1rem;
 }
+.catalog-item{
+	font-size: 0.9em;
+	text-transform: uppercase;
+}
+.catalog-item-card{
+	font-size: 1em;
+	text-transform: uppercase;
+}
+.page-header:after, .page-header:before {
+    z-index: -2;
+}

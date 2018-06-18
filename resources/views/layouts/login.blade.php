@@ -32,11 +32,9 @@
 
 <body class="@yield('body-class')">
 
-	@include('includes.top_nav')
-	<div class="wrapper">
+	@include('includes.login_top_nav')
 		@yield('content')
-		@include('includes.footer')
-	</div>
+		@include('includes.login_footer')
 </body>
 
    <!--   Core JS Files   -->

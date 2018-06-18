@@ -73,6 +73,9 @@ product-page
 
             </div>
             <div class="col-md-6 ml-auto mr-auto">
+            <div class="row">
+              <span><a class="btn btn-link btn-danger" href="{{ route('site.show-stock-page.get', ['category_id' => $product->category_id]) }}">{{ $product->category }}</a> / <a class="btn btn-link btn-info">{{ $product->name }}</a></span>
+            </div>
                 <h2 class="title"> {{ $product->name }} </h2>
                 @isset($product->diff_shop_article)
                 <h5 class="category">{{ $product->diff_shop_article }}</h5>
@@ -142,7 +145,7 @@ product-page
             </div>
         </div>
 
-
+    @isset($product->delivery_info)
         <div class="card card-plain">
             <div class="card-header" role="tab" id="headingThree">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -151,18 +154,13 @@ product-page
                     <i class="now-ui-icons arrows-1_minimal-down"></i>
                 </a>
             </div>
-            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree">
               <div class="card-body">
-                  <ul>
-                   <li>Storm and midnight-blue stretch cotton-blend</li>
-                   <li>Notch lapels, functioning buttoned cuffs, two front flap pockets, single vent, internal pocket</li>
-                   <li>Two button fastening</li>
-                   <li>84% cotton, 14% nylon, 2% elastane</li>
-                   <li>Dry clean</li>
-               </ul>
+                {{ $product->delivery_info }}
            </div>
        </div>
    </div>
+   @endisset
 </div>
 
 <div class="row justify-content-end">

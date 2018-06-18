@@ -58,7 +58,7 @@
                   @foreach ($subcategories as $subcategory)
                   @if($subcategory->level == 3) 
                   @if($subcategory->parent == $category->id)
-                  <p>
+                  <p class="catalog-item">
                    <a class="catalog-item" href="{{ route('site.show-stock-page.get', ['stock_id' => $subcategory->id]) }}">{{ $subcategory->title }}</a>
                  </p>
                  @endif

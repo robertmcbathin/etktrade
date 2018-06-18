@@ -69,12 +69,12 @@
                  </h6>
                </div>
 
-               <div id="collapse-{{ $spec_category->id }}" class="collapse" role="tabpanel" aria-labelledby="heading-{{ $spec_category->id }}">
+               <div id="collapse-{{ $spec_category->id }}" class="collapse show" role="tabpanel" aria-labelledby="heading-{{ $spec_category->id }}">
                  <div class="card-body">
                   @foreach ($categories as $subcategory)
                   @if($subcategory->level == 2) 
                   @if($subcategory->parent == $spec_category->id)
-                  <p>
+                  <p class="catalog-item">
                    <a class="catalog-item" href="{{ route('site.show-subcategories-page.get',['subcategory_id' => $subcategory->id]) }}">{{ $subcategory->title }}</a>
                  </p>
                  @endif
@@ -113,7 +113,7 @@
                   @foreach ($categories as $subcategory)
                   @if($subcategory->level == 2) 
                   @if($subcategory->parent == $category->id)
-                  <p>
+                  <p class="catalog-item">
                    <a class="catalog-item" href="{{ route('site.show-subcategories-page.get',['subcategory_id' => $subcategory->id]) }}">{{ $subcategory->title }}</a>
                  </p>
                  @endif
@@ -182,28 +182,38 @@
          <div class="card card-product">
            <div class="card-image">
              <a href="{{ route('site.show-product-page.get',[ 'product_id' => $top_product->id ]) }}">
-               <img src="{{ $top_product->image }}" alt="..."/>
+               <img src="{{ $top_product->image }}" alt=""/>
              </a>
            </div>
            <div class="card-body">
              <a href="{{ route('site.show-product-page.get',[ 'product_id' => $top_product->id ]) }}">
-               <h4 class="card-title">{{ $top_product->name }}</h4>
+              <!--             <div class="static rating">
+               <input type="radio" id="star5" name="rating" value="5" disabled><label for="star5" title="Отлично">5 stars</label>
+             </div> -->
+               <h4 class="card-title catalog-item-card">{{ $top_product->name }}</h4>
+
              </a>
              <div class="card-footer">
                <div class="price-container">
                 <span class="price"><i class="fa fa-ruble"> {{ $top_product->price }}</i></span>
               </div>
 
-              <button class="btn btn-primary btn-icon pull-right"  rel="tooltip" title="Добавить в корзину" data-placement="left">
-                <i class="fa fa-shopping-cart"></i>
+              <button class="btn btn-primary pull-right"  rel="tooltip" title="Добавить в корзину" data-placement="right">
+                <i class="fa fa-shopping-cart"> В КОРЗИНУ</i>
               </button>
+              <hr>
+                            <button type="button" rel="tooltip" title="" class="btn btn-icon btn-neutral" data-original-title="Добавить в список желаемого">
+               <i class="far fa-heart"></i>
+             </button>
             </div>
           </div>
         </div> <!-- end card -->
       </div>
       @endforeach
 
-      <div class="col-md-3 ml-auto mr-auto">
+   </div>
+   <div class="row">
+           <div class="col-md-3 ml-auto mr-auto">
        <button rel="tooltip" class="btn btn-primary">Все популярные товары</button>
      </div>
    </div>
@@ -227,7 +237,7 @@
 
         <div class="card-body">
           <h4 class="card-title">
-            <a href="{{ route('site.show-product-page.get',[ 'product_id' => $spec_product->id ]) }}">{{ $spec_product->name }}</a>
+            <a class=" catalog-item-card" href="{{ route('site.show-product-page.get',[ 'product_id' => $spec_product->id ]) }}">{{ $spec_product->name }}</a>
           </h4>
           <div class="card-footer">
             <div class="price-container">
@@ -236,7 +246,7 @@
             </div>
             <div class="stats stats-right">
               <button type="button" rel="tooltip" title="" class="btn btn-icon btn-neutral" data-original-title="Добавить в список желаемого">
-               <i class="fa fa-heart"></i>
+               <i class="far fa-heart"></i>
              </button>
            </div>
          </div>

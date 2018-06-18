@@ -1,5 +1,5 @@
         <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-white fixed-top">
+<nav class="navbar navbar-expand-lg bg-white fixed-top navbar-transparent">
 	<div class="container">
 		
 
@@ -50,26 +50,6 @@
 						</a>
 					</div>
 				</li>
-
-				<li class="nav-item">
-					<a class="nav-link btn btn-primary" href="" target="_blank">
-						<p> <i class="fa fa-shopping-cart"></i> КОРЗИНА</p>
-					</a>
-				</li>
-				@guest
-				<li class="nav-item">
-					<a class="nav-link btn btn-neutral" href="/login" target="_blank">
-						<p> ВОЙТИ</p>
-					</a>
-				</li>
-				@endguest
-				@auth
-				<li class="nav-item">
-					<a class="nav-link btn btn-neutral" href="/logout" target="_blank">
-						<p> ВЫЙТИ</p>
-					</a>
-				</li>
-				@endauth
 
 			
 

@@ -16,6 +16,11 @@ Route::get('/', [
 	'as' => 'site.show-main-page.get'
 ]);
 
+Route::get('/how-to-register', [
+	'uses' => 'SiteController@showHowToRegisterPage',
+	'as' => 'site.how-to-register.get'
+]);
+
 Route::get('/categories/{category_id}', [
 	'uses' => 'SiteController@showCategoriesPage',
 	'as' => 'site.show-categories-page.get'
@@ -35,3 +40,8 @@ Route::get('/product/{product_id}', [
 	'uses' => 'SiteController@showProductPage',
 	'as' => 'site.show-product-page.get'
 ]);
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

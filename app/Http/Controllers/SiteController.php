@@ -10,15 +10,18 @@ class SiteController extends Controller
     public function showMainPage(){
     	$categories = DB::table('ETKTRADE_CATEGORIES')
                         ->where('is_spec',0)
+                        ->where('is_published',1)
     					->get();
         $spec_categories = DB::table('ETKTRADE_CATEGORIES')
                         ->where('is_spec',1)
                         ->get();
     	$top_products = DB::table('ETKTRADE_PRODUCTS')
+                            ->where('is_published',1)
     						->limit(6)
     						->get();
         $spec_products = DB::table('ETKTRADE_PRODUCTS')
                             ->whereNotNull('price_without_discount')
+                            ->where('is_published',1)
                             ->limit(3)
                             ->get();
     	return view('index',[
@@ -38,9 +41,11 @@ class SiteController extends Controller
                     ->first(); 
         $category = DB::table('ETKTRADE_CATEGORIES')
                         ->where('id',$category_id)
+                        ->where('is_published',1)
                         ->first();    
         $subcategories = DB::table('ETKTRADE_CATEGORIES')
                             ->where('parent',$category_id)
+                            ->where('is_published',1)
                             ->get();            
         return view('pages.categories',[
             'meta' => $meta,
@@ -58,6 +63,7 @@ class SiteController extends Controller
                     ->first();
         $category = DB::table('ETKTRADE_CATEGORIES')
                         ->where('id',$subcategory_id)
+                        ->where('is_published',1)
                         ->first();
         $parent_category = DB::table('ETKTRADE_CATEGORIES')
                     ->where('id',$category->parent)
@@ -67,6 +73,7 @@ class SiteController extends Controller
                                     ->first();
         $subcategories = DB::table('ETKTRADE_CATEGORIES')
                             ->where('parent',$subcategory_id)
+                            ->where('is_published',1)
                             ->get();
         $attributes = DB::table('ETKTRADE_ATTRIBUTES')
                             ->where('category_id',$subcategory_id)
@@ -88,6 +95,7 @@ class SiteController extends Controller
         }
         $products = DB::table('ETKTRADE_PRODUCTS')
                         ->whereIn('category_id',$cat_list)
+                        ->where('is_published',1)
                         ->paginate(24);
         $product_list = [];
         foreach($products as $product){
@@ -121,9 +129,11 @@ class SiteController extends Controller
                     ->first();
         $category = DB::table('ETKTRADE_CATEGORIES')
                         ->where('id',$stock_id)
+                        ->where('is_published',1)
                         ->first();
         $products = DB::table('ETKTRADE_PRODUCTS')
                         ->where('category_id',$stock_id)
+                        ->where('is_published',1)
                         ->paginate(24);
         $parent_category = DB::table('ETKTRADE_CATEGORIES')
                     ->where('id',$category->parent)
@@ -161,6 +171,7 @@ class SiteController extends Controller
         $product = DB::table('ETKTRADE_PRODUCTS')
                     ->leftJoin('ETKTRADE_CATEGORIES', 'ETKTRADE_CATEGORIES.id', '=', 'ETKTRADE_PRODUCTS.category_id')
                     ->where('ETKTRADE_PRODUCTS.id',$product_id)
+                    ->where('ETKTRADE_PRODUCTS.is_published',1)
                     ->select('ETKTRADE_PRODUCTS.*', 'ETKTRADE_CATEGORIES.title as category')
                     ->first();
         $attributes = DB::table('ETKTRADE_PRODUCT_ATTRIBUTES')
