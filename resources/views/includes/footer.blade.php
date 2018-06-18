@@ -104,7 +104,7 @@
         <hr>
 
         <div class="copyright">
-            Copyright © <script>document.write(new Date().getFullYear())</script> ЕТКтрейд
+            © <script>document.write(new Date().getFullYear())</script> SpaceTrade
         </div>
     </div>
 
