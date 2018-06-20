@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use \Auth;
+use DB;
+use View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
@@ -16,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::defaultView('pagination::bootstrap-4');
+
     }
 
     /**

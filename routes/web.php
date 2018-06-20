@@ -42,6 +42,31 @@ Route::get('/product/{product_id}', [
 ]);
 
 
+
+
 Auth::routes();
 
+/**
+ * ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ
+ */
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('profile',[
+		'uses' => 'UserController@showProfilePage',
+		'as' => 'profile.show-profile-page.get'
+		]);
+});
+
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+/**
+ * AJAX
+ */
+Route::post('/ajax/add-to-cart',[
+	'uses' => 'UserController@ajaxAddToCart',
+	'as' => 'ajax.add-to-cart.post'
+]);
+Route::post('/ajax/check-cart',[
+	'uses' => 'UserController@ajaxCheckCart',
+	'as' => 'ajax.check-cart.post'
+]);

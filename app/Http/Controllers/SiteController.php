@@ -179,9 +179,17 @@ class SiteController extends Controller
                         ->where('product_id',$product->id)
                         ->select('ETKTRADE_PRODUCT_ATTRIBUTES.*','ETKTRADE_ATTRIBUTES.title as title','ETKTRADE_ATTRIBUTES.unit as unit')
                         ->get();
+        $gallery_items = DB::table('ETKTRADE_PRODUCT_PHOTOS')
+                          ->where('product_id',$product->id)
+                          ->get();
+        $category = DB::table('ETKTRADE_CATEGORIES')
+                        ->where('id',$product->category_id)
+                        ->first();
         return view('pages.product',[
             'product' => $product,
-            'attributes' => $attributes
+            'attributes' => $attributes,
+            'gallery_items' => $gallery_items,
+            'category' => $category
         ]);
     }
 }

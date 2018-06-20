@@ -1,0 +1,271 @@
+@extends('layouts.master')
+@section('title')
+Личный кабинет
+@endsection
+@section('description')
+Личный кабинет
+@endsection
+@section('keywords')
+
+@endsection
+@section('body-class')
+profile-page
+@endsection
+@section('transparency')
+navbar-transparent
+@endsection
+@section('content')
+<div class="page-header page-header-xs" filter-color="orange">
+
+
+	<div class="page-header-image" data-parallax="true" style="background-image: url(&quot;../assets/img/bg5.jpg&quot;); transform: translate3d(0px, 0px, 0px);">
+	</div>
+
+
+
+
+	<div class="content-center">
+		<div class="photo-container">
+			<img src="https://etk21.ru{{ Auth::user()->profile_image }}" alt="">
+		</div>
+
+		<h3 class="title">{{ Auth::user()->name }} {{ Auth::user()->lastname }}</h3>
+		<p class="category"></p>
+
+		<div class="content">
+			<div class="social-description">
+				<h2>26</h2>
+				<p>Заказы</p>
+			</div>
+			<div class="social-description">
+				<h2>0</h2>
+				<p>Отзывы</p>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+<div class="section">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="nav-align-center">
+					<ul class="nav nav-pills nav-pills-primary nav-pills-just-icons" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" data-toggle="tab" href="#cart" role="tablist">
+								<i class="now-ui-icons shopping_cart-simple"></i>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" href="#orders" role="tablist">
+								<i class="now-ui-icons shopping_box"></i>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" href="#reviews" role="tablist">
+								<i class="now-ui-icons ui-2_chat-round"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Tab panes -->
+				<div class="tab-content gallery">
+
+					<div class="tab-pane active" id="cart" role="tabpanel">
+						<div class="row">
+							<div class="card card-plain">
+
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-shopping">
+											<thead class="">
+
+												<tr><th class="text-center">
+
+
+
+												</th>
+
+												<th>
+
+
+												</th>
+
+
+												<th class="text-right">
+
+													Цена
+
+												</th>
+
+												<th class="text-right">
+
+													Количество
+
+												</th>
+
+												<th class="text-right">
+
+													Сумма
+
+												</th>
+
+
+											</tr></thead>
+											<tbody>
+												@foreach($cart_items as $cart_item)
+												<tr>
+													<td>
+														<div class="img-container">
+															<img src="{{ $cart_item->image }}" alt="">
+														</div>
+													</td>
+													<td class="td-name">
+														<a>{{ $cart_item->name }}</a>
+													</td>
+													<td class="td-number">
+														<i class="fa fa-ruble"></i> {{ $cart_item->price }}
+													</td>
+													<td class="td-number">
+														{{ $cart_item->product_count }}
+														<div class="btn-group">
+															<button class="btn btn-info btn-sm"> <i class="now-ui-icons ui-1_simple-delete"></i> </button>
+															<button class="btn btn-info btn-sm"> <i class="now-ui-icons ui-1_simple-add"></i> </button>
+														</div>
+													</td>
+													<td class="td-number">
+														<i class="fa fa-ruble"></i> {{ $cart_item->amount }}
+													</td>
+													<td class="td-actions">
+														<button type="button" rel="tooltip" data-placement="left" title="" class="btn btn-neutral" data-original-title="Remove item">
+															<i class="now-ui-icons ui-1_simple-remove"></i>
+														</button>
+													</td>
+												</tr>
+
+												@endforeach
+												<tr>
+													<td colspan="3">
+													</td>
+													<td class="td-total">
+														Итого
+													</td>
+													<td class="td-price">
+														<i class="fa fa-ruble"></i> {{ $cart_total }}
+													</td>
+													<td colspan="3" class="text-right">
+														<button type="button" rel="tooltip" class="btn btn-info btn-round " data-original-title="" title="">Перейти к заказу<i class="now-ui-icons arrows-1_minimal-right"></i>
+														</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="tab-pane" id="orders" role="tabpanel">
+						<div class="row">
+
+							<div class="col-md-5 ml-auto mr-auto">
+								<div class="card card-background card-background-product card-raised" style="background-image: url('../assets/img/project8.jpg')">
+									<div class="card-body">
+										<h2 class="card-title">Social Analytics</h2>
+										<p class="card-description">
+											Insight to help you create, connect, and convert. Understand Your Audience's Interests, Influence, Interactions, and Intent. Discover emerging topics and influencers to reach new audiences.
+										</p>
+										<label class="badge badge-neutral">Analytics</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-5">
+								<div class="info info-horizontal">
+									<div class="icon icon-danger">
+										<i class="now-ui-icons ui-2_chat-round"></i>
+									</div>
+									<div class="description">
+										<h5 class="info-title">Listen to Social Conversations</h5>
+										<p class="description">
+											Gain access to the demographics, psychographics, and location of unique people who talk about your brand.
+										</p>
+									</div>
+								</div>
+
+								<div class="info info-horizontal">
+									<div class="icon icon-danger">
+										<i class="now-ui-icons design-2_ruler-pencil"></i>
+									</div>
+									<div class="description">
+										<h5 class="info-title">Social Conversions</h5>
+										<p class="description">
+											Track actions taken on your website that originated from social, and understand the impact on your bottom line.
+										</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="tab-pane" id="reviews" role="tabpanel">
+						<div class="row">
+
+							<div class="col-md-5 ml-auto mr-auto">
+								<div class="card card-background card-background-product card-raised" style="background-image: url('../assets/img/bg25.jpg')">
+									<div class="card-body">
+										<h2 class="card-title">Interior Redesign</h2>
+										<p class="card-description">
+											Insight to help you create, connect, and convert. Understand Your Audience's Interests, Influence, Interactions, and Intent. Discover emerging topics and influencers to reach new audiences.
+										</p>
+										<label class="badge badge-neutral">Interior</label>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-md-5">
+								<div class="info info-horizontal">
+									<div class="icon icon-info">
+										<i class="now-ui-icons design_palette"></i>
+									</div>
+									<div class="description">
+										<h5 class="info-title">Colors adjustments</h5>
+										<p class="description">
+											Gain access to the demographics, psychographics, and location of unique people who talk about your brand.
+										</p>
+									</div>
+								</div>
+
+								<div class="info info-horizontal">
+									<div class="icon icon-info">
+										<i class="now-ui-icons design_scissors"></i>
+									</div>
+									<div class="description">
+										<h5 class="info-title">Performance Clothing</h5>
+										<p class="description">
+											Unify data from Facebook, Instagram, Twitter, LinkedIn, and Youtube to gain rich insights from easy-to-use reports.
+										</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+</div>
+@endsection

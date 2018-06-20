@@ -1,5 +1,5 @@
         <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-white fixed-top">
+<nav class="navbar navbar-expand-lg bg-white fixed-top @yield('transparency')">
 	<div class="container">
 		
 
@@ -52,8 +52,8 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link btn btn-primary" href="" target="_blank">
-						<p> <i class="fa fa-shopping-cart"></i> КОРЗИНА</p>
+					<a class="nav-link btn btn-primary" href="/profile"">
+						<p> <i class="fa fa-shopping-cart"></i> КОРЗИНА  <span id="top-nav-cart">@isset($cart_items_count) ({{ $cart_items_count }})  @endisset</span></p>
 					</a>
 				</li>
 				@guest

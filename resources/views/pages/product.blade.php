@@ -1,9 +1,9 @@
 @extends('layouts.master')
 @section('title')
-{{ $product->name }} - ЕТК Трейд
+{{ $product->name }} на SpaceTrade.in
 @endsection
 @section('description')
-{{ $product->name }} - ЕТК Трейд
+{{ $product->name }} на SpaceTrade.in
 @endsection
 @section('keywords')
 
@@ -33,24 +33,31 @@ product-page
                 <div id="productCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
                     <ol class="carousel-indicators">
                         <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
-
-                        <li data-target="#productCarousel" data-slide-to="1" class=""></li>
-                        <li data-target="#productCarousel" data-slide-to="2" class=""></li>
-                        <li data-target="#productCarousel" data-slide-to="3"></li>
+                        @isset($gallery_items)
+                        @if(count($gallery_items) > 0)
+                        @for($i = 0; $i < count($gallery_items); $i++)
+                        <li data-target="#productCarousel" data-slide-to="{{ $i }}" class=""></li>
+                        @endfor
+                        @endif
+                        @endisset
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
                             <img class="d-block img-raised" src="{{ $product->image }}" alt="{{ $product->name }}">
                         </div>
+
+                        @isset($gallery_items)
+                        @if(count($gallery_items) > 0)
+                        @foreach($gallery_items as $gallery_item)
+
                         <div class="carousel-item">
-                            <img class="d-block img-raised" src="../assets/img/pp-2.jpg" alt="Second slide">
+                            <img class="d-block img-raised" src="http://etkplus.ru/{{ $gallery_item->image_path }}" alt="">
                         </div>
-                        <div class="carousel-item">
-                            <img class="d-block img-raised" src="../assets/img/pp-3.jpg" alt="Third slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block img-raised" src="../assets/img/pp-4.jpg" alt="Third slide">
-                        </div>
+
+                        @endforeach
+                        @endif
+                        @endisset
+
                     </div>
                     <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
                         <button type="button" class="btn btn-primary btn-icon btn-round btn-sm" name="button">
@@ -66,203 +73,216 @@ product-page
 
                 @isset($product->quote)
                 <p class="blockquote blockquote-primary">
+                    {{ $product->quote }}
                     <br><br>
-                    <small></small>
+                    
                 </p>
                 @endisset
 
-            </div>
-            <div class="col-md-6 ml-auto mr-auto">
-            <div class="row">
-              <span><a class="btn btn-link btn-danger" href="{{ route('site.show-stock-page.get', ['category_id' => $product->category_id]) }}">{{ $product->category }}</a> / <a class="btn btn-link btn-info">{{ $product->name }}</a></span>
-            </div>
-                <h2 class="title"> {{ $product->name }} </h2>
-                @isset($product->diff_shop_article)
-                <h5 class="category">{{ $product->diff_shop_article }}</h5>
-                @endisset
-                <h5 class="category">{{ $product->category }}</h5>
-                @if(($product->price_without_discount != null) || ($product->price_without_discount != 0))
-                <h2 class="main-price">
-                    <div class="price-container product-discount">
-                      <span class="price price-old"> <i class="fa fa-ruble"></i> {{ $product->price_without_discount }}</span>
-                      <span class="price price-new"> <i class="fa fa-ruble"></i> {{ $product->price }}</span>
-                  </div>
-              </h2>
-              @else
-              <h2 class="main-price"><i class="fa fa-ruble"></i> {{ $product->price }}</h2>
-              @endif
+                <br>
+                @isset($gallery_items)
+                @if(count($gallery_items) > 0)
+                <div>
+                    <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+                        @if (count($gallery_items) > 0)
+                        @foreach ($gallery_items as $gallery_item)
+                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="col-md-3 col-sm-4 gallery-item">
+                           <a href="http://etkplus.ru/{{ $gallery_item->image_path }}" itemprop="contentUrl" data-size="{{ $gallery_item->image_width }}x{{ $gallery_item->image_height }}">
+                             <img src="http://etkplus.ru/{{ $gallery_item->image_path }}" itemprop="thumbnail" alt="" class="horizontal-image img-rounded img-responsive">
+                         </a>
+                         <figcaption itemprop="caption description">{{ $gallery_item->image_caption }}</figcaption>
+                     </figure>
+                     @endforeach
+                     @endif
+                 </div>
 
-              <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
-                  <div class="card card-plain">
-                    <div class="card-header" role="tab" id="headingOne">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Описание
-                            <i class="now-ui-icons arrows-1_minimal-down"></i>
-                        </a>
-                    </div>
+                 <!-- Root element of PhotoSwipe. Must have class pswp. -->
+                 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
-                    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                      <div class="card-body">
-                        <p>{{ $product->description }}</p>
-                    </div>
-                </div>
-            </div>
+    <!-- Background of PhotoSwipe. 
+        It's a separate element, as animating opacity is faster than rgba(). -->
+        <div class="pswp__bg"></div>
 
+        <!-- Slides wrapper with overflow:hidden. -->
+        <div class="pswp__scroll-wrap">
 
-            <div class="card card-plain">
-                <div class="card-header" role="tab" id="headingTwo">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Характеристики
+          <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+          <!-- don't modify these 3 pswp__item elements, data is added later on. -->
+          <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
 
-                        <i class="now-ui-icons arrows-1_minimal-down"></i>
-                    </a>
-                </div>
-                <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo">
-                  <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <tbody>
-                                @isset($attributes)
-                                @foreach($attributes as $attribute)
-                                <tr>
-                                    <td>
-                                        {{ $attribute->title }}
-                                    </td>
-                                    <td class="text-right">
-                                        {{ $attribute->value }} 
-                                        @isset($attribute->unit)
-                                         {{ $attribute->unit }}
-                                        @endisset
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @endisset
-                            </tbody>
-                        </table>
-                    </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
 
+            <div class="pswp__top-bar">
+
+              <!--  Controls are self-explanatory. Order can be changed. -->
+
+              <div class="pswp__counter"></div>
+
+              <button class="pswp__button pswp__button--close" title="Закрыть (Esc)"></button>
+
+              <button class="pswp__button pswp__button--share" title="Скачать"></button>
+
+              <button class="pswp__button pswp__button--fs" title="Полный экран"></button>
+
+              <button class="pswp__button pswp__button--zoom" title="Увеличить / уменьшить"></button>
+
+              <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+              <!-- element will get class pswp__preloader--active when preloader is running -->
+              <div class="pswp__preloader">
+                <div class="pswp__preloader__icn">
+                  <div class="pswp__preloader__cut">
+                    <div class="pswp__preloader__donut"></div>
                 </div>
             </div>
         </div>
+    </div>
 
-    @isset($product->delivery_info)
-        <div class="card card-plain">
-            <div class="card-header" role="tab" id="headingThree">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Доставка и получение
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div> 
+  </div>
 
-                    <i class="now-ui-icons arrows-1_minimal-down"></i>
-                </a>
-            </div>
-            <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree">
-              <div class="card-body">
-                {{ $product->delivery_info }}
-           </div>
-       </div>
-   </div>
-   @endisset
+  <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+  </button>
+
+  <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+  </button>
+
+  <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+  </div>
+
+</div>
+
+</div>
+
+</div> 
+</div>
+
+@endif
+@endisset
+
+
+
+
+</div>
+<div class="col-md-6 ml-auto mr-auto">
+
+    @if($category->level == 3)
+    <div class="row">
+      <span><a class="btn btn-link btn-danger" href="{{ route('site.show-stock-page.get', ['category_id' => $product->category_id]) }}">{{ $product->category }}</a> / <a class="btn btn-link btn-info">{{ $product->name }}</a></span>
+  </div>
+  @elseif($category->level == 2)
+  <div class="row">
+      <span><a class="btn btn-link btn-danger" href="{{ route('site.show-subcategories-page.get', ['category_id' => $product->category_id]) }}">{{ $product->category }}</a> / <a class="btn btn-link btn-info">{{ $product->name }}</a></span>
+  </div>
+  @endif
+
+
+  <h2 class="title"> {{ $product->name }} </h2>
+  @isset($product->diff_shop_article)
+  <h5 class="category">{{ $product->diff_shop_article }}</h5>
+  @endisset
+  <h5 class="category">{{ $product->category }}</h5>
+  @if(($product->price_without_discount != null) || ($product->price_without_discount != 0))
+  <h2 class="main-price">
+    <div class="price-container product-discount">
+      <span class="price price-old"> <i class="fa fa-ruble"></i> {{ $product->price_without_discount }}</span>
+      <span class="price price-new"> <i class="fa fa-ruble"></i> {{ $product->price }}</span>
+  </div>
+</h2>
+@else
+<h2 class="main-price"><i class="fa fa-ruble"></i> {{ $product->price }}</h2>
+@endif
+
+<div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+  <div class="card card-plain">
+    <div class="card-header" role="tab" id="headingOne">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Описание
+            <i class="now-ui-icons arrows-1_minimal-down"></i>
+        </a>
+    </div>
+
+    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+      <div class="card-body">
+        <p>{{ $product->description }}</p>
+    </div>
+</div>
+</div>
+
+
+<div class="card card-plain">
+    <div class="card-header" role="tab" id="headingTwo">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Характеристики
+
+            <i class="now-ui-icons arrows-1_minimal-down"></i>
+        </a>
+    </div>
+    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tbody>
+                    @isset($attributes)
+                    @foreach($attributes as $attribute)
+                    <tr>
+                        <td>
+                            {{ $attribute->title }}
+                        </td>
+                        <td class="text-right">
+                            {{ $attribute->value }} 
+                            @isset($attribute->unit)
+                            {{ $attribute->unit }}
+                            @endisset
+                        </td>
+                    </tr>
+                    @endforeach
+                    @endisset
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
+
+@isset($product->delivery_info)
+<div class="card card-plain">
+    <div class="card-header" role="tab" id="headingThree">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Доставка и получение
+
+            <i class="now-ui-icons arrows-1_minimal-down"></i>
+        </a>
+    </div>
+    <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree">
+      <div class="card-body">
+        {{ $product->delivery_info }}
+    </div>
+</div>
+</div>
+@endisset
 </div>
 
 <div class="row justify-content-end">
-    <button class="btn btn-primary mr-3">Добавить в корзину &nbsp;<i class="now-ui-icons shopping_cart-simple"></i></button>
+    <button class="btn btn-primary mr-3 add-to-cart"  value="{{ $product->id }}" >Добавить в корзину &nbsp;<i class="now-ui-icons shopping_cart-simple"></i></button>
 </div>
 </div>
 </div>
 
-<div class="section">
-    <div class="row">
-        <div class="col-md-8 ml-auto mr-auto text-center mr-5">
-            <h2 class="title">How to wear it</h2>
-            <h4 class="description">You need more information? Check what other persons are saying about our product. They are very happy with their purchase.</h4>
-        </div>
-    </div>
-    <div class="section-story-overview">
-        <div class="row">
-            <div class="col-md-4 ml-auto mr-auto">
-                <div class="image-container image-left" style="background-image: url('../assets/img/pp-5.jpg')">
-                    <!-- First image on the left side -->
-                    <p class="blockquote blockquote-primary">"Over the span of the satellite record, Arctic sea ice has been declining significantly, while sea ice in the Antarctichas increased very slightly"
-                        <br>
-                        <br>
-                        <small> - NOAA</small>
-                    </p>
-                </div>
-                <!-- Second image on the left side of the article -->
-                <div class="image-container" style="background-image: url('../assets/img/bg29.jpg')"></div>
-            </div>
-            <div class="col-md-4 ml-auto mr-auto">
-                <!-- First image on the right side, above the article -->
-                <div class="image-container image-right" style="background-image: url('../assets/img/pp-4.jpg')"></div>
-                <h3>So what does the new record for the lowest level of winter ice actually mean</h3>
-                <p>The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever happens with climate change. Even if the Arctic continues to be one of the fastest-warming regions of the world, it will always be plunged into bitterly cold polar dark every winter. And year-by-year, for all kinds of natural reasons, there’s huge variety of the state of the ice.
-                </p>
-                <p>For a start, it does not automatically follow that a record amount of ice will melt this summer. More important for determining the size of the annual thaw is the state of the weather as the midnight sun approaches and temperatures rise. But over the more than 30 years of satellite records, scientists have observed a clear pattern of decline, decade-by-decade.</p>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="features-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 ml-auto mr-auto text-center">
-                <h2 class="title">Not convinced yet!</h2>
-                <h4 class="description">Havenly is a convenient, personal and affordable way to redecorate your home room by room. Collaborate with our professional interior designers on our online platform. </h4>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card card-background card-raised" data-background-color="" style="background-image: url('../assets/img/bg24.jpg')">
-                    <div class="info">
-                        <div class="icon icon-white">
-                            <i class="now-ui-icons shopping_delivery-fast"></i>
-                        </div>
-                        <div class="description">
-                            <h4 class="info-title">1 Day Delivery </h4>
-                            <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
-                            <a href="#pablo" class="ml-3">Find more...</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card card-background card-raised" data-background-color="" style="background-image: url('../assets/img/bg28.jpg')">
-                    <div class="info">
-                        <div class="icon icon-white">
-                            <i class="now-ui-icons business_badge"></i>
-                        </div>
-                        <div class="description">
-                            <h4 class="info-title">Refund Policy</h4>
-                            <p>Divide details about your product or agency work into parts. Write a few lines about each one. Very good refund policy just for you.</p>
-                            <a href="#pablo">Find more...</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card card-background card-raised" data-background-color="" style="background-image: url('../assets/img/bg25.jpg')">
-                    <div class="info">
-
-                        <div class="icon">
-                            <i class="now-ui-icons ui-2_favourite-28"></i>
-                        </div>
-                        <div class="description">
-                            <h4 class="info-title">Popular Item</h4>
-                            <p>Share a floor plan, and we'll create a visualization of your room. A paragraph describing a feature will be enough. This is a popular item for you.</p>
-                            <a href="#pablo" class="ml-3">Find more...</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
 
 </div>
 </div>
 
 @endsection
+<script>
+  var token = '{{ Session::token() }}';
+  var addToCartUrl = '{{ route('ajax.add-to-cart.post') }}';
+</script>
