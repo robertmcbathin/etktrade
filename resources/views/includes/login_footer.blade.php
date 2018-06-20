@@ -7,7 +7,7 @@
         <hr>
 
         <div class="copyright">
-            Copyright © <script>document.write(new Date().getFullYear())</script> SpaceTrade
+             © <script>document.write(new Date().getFullYear())</script> SpaceTrade
         </div>
     </div>
 

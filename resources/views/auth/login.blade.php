@@ -9,7 +9,7 @@ SpaceTrade
 
 @endsection
 @section('body-class')
-signup-page
+login-page
 @endsection
 @section('content')
         <div class="page-header" filter-color="orange">
