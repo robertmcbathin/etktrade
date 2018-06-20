@@ -13,7 +13,7 @@ class UserController extends Controller
     	$cart_items = DB::table('ETKTRADE_CART_ITEMS')
     	                ->join('ETKTRADE_PRODUCTS','ETKTRADE_PRODUCTS.id','=','ETKTRADE_CART_ITEMS.product_id')
     					->where('ETKTRADE_CART_ITEMS.user_id',Auth::user()->id)
-    					->select('ETKTRADE_CART_ITEMS.*','ETKTRADE_PRODUCTS.*')
+    					->select('ETKTRADE_CART_ITEMS.*','ETKTRADE_PRODUCTS.*','ETKTRADE_CART_ITEMS.id as item_id')
     					->get();
     	/**
     	 * CALCULATING AMOUNT
@@ -26,12 +26,24 @@ class UserController extends Controller
     	 */
     	$cart_total = 0;
     	foreach($cart_items as $cart_item){
-    		$cart_total += $cart_item->price;
+    		$cart_total += $cart_item->amount;
     	}
     	return view('profile.index',[
     		'cart_items' => $cart_items,
     		'cart_total' => $cart_total
     	]);
+    }
+
+    public function postDeleteCartItem(Request $request){
+        $cart_item = $request->cart_item;
+        try {
+            DB::table('ETKTRADE_CART_ITEMS')
+              ->where('id',$cart_item)
+              ->delete();
+        } catch (Exception $e) {
+            
+        }
+        return redirect()->back();
     }
 
     /**
@@ -112,4 +124,98 @@ class UserController extends Controller
         }
 
     }
+
+    public function ajaxDecreaseItemCount(Request $request){
+        $cart_item_id = $request->cartItemId;
+
+        try {
+            $cart_item = DB::table('ETKTRADE_CART_ITEMS')
+                            ->where('id', $cart_item_id)
+                            ->first(); 
+            DB::table('ETKTRADE_CART_ITEMS')
+              ->where('id', $cart_item_id)
+              ->update([
+                'product_count' => --$cart_item->product_count
+              ]);
+            /** 
+            * RECALCULATE AMOUNT
+            **/
+            $product = DB::table('ETKTRADE_PRODUCTS')
+                        ->where('id',$cart_item->product_id)
+                        ->first();
+            $item_amount = $cart_item->product_count * $product->price;
+            /**
+            * RECALCULATE TOTAL
+            **/
+           $cart_items = DB::table('ETKTRADE_CART_ITEMS')
+                           ->join('ETKTRADE_PRODUCTS','ETKTRADE_PRODUCTS.id','=','ETKTRADE_CART_ITEMS.product_id')
+                           ->where('ETKTRADE_CART_ITEMS.user_id',Auth::user()->id)
+                           ->select('ETKTRADE_CART_ITEMS.*','ETKTRADE_PRODUCTS.*','ETKTRADE_CART_ITEMS.id as item_id')
+                           ->get();
+           /**
+            * CALCULATING AMOUNT
+            */
+           foreach ($cart_items as $item) {
+               $item->amount = $item->price * $item->product_count;
+           }
+           /**
+            * CALCULATING TOTAL
+            */
+           $cart_total = 0;
+           foreach($cart_items as $item){
+               $cart_total += $item->amount;
+           }
+        } catch (Exception $e) {
+            
+        }
+        return response()->json(['message' => 'success','item_count' => $cart_item->product_count, 'item_amount' => $item_amount, 'cart_total' => $cart_total],200);
+    }
+
+    public function ajaxIncreaseItemCount(Request $request){
+        $cart_item_id = $request->cartItemId;
+
+        try {
+            $cart_item = DB::table('ETKTRADE_CART_ITEMS')
+                            ->where('id', $cart_item_id)
+                            ->first(); 
+            DB::table('ETKTRADE_CART_ITEMS')
+              ->where('id', $cart_item_id)
+              ->update([
+                'product_count' => ++$cart_item->product_count
+              ]);
+            /** 
+            * RECALCULATE AMOUNT
+            **/
+            $product = DB::table('ETKTRADE_PRODUCTS')
+                        ->where('id',$cart_item->product_id)
+                        ->first();
+            $item_amount = $cart_item->product_count * $product->price;
+            /**
+            * RECALCULATE TOTAL
+            **/
+           $cart_items = DB::table('ETKTRADE_CART_ITEMS')
+                           ->join('ETKTRADE_PRODUCTS','ETKTRADE_PRODUCTS.id','=','ETKTRADE_CART_ITEMS.product_id')
+                           ->where('ETKTRADE_CART_ITEMS.user_id',Auth::user()->id)
+                           ->select('ETKTRADE_CART_ITEMS.*','ETKTRADE_PRODUCTS.*','ETKTRADE_CART_ITEMS.id as item_id')
+                           ->get();
+           /**
+            * CALCULATING AMOUNT
+            */
+           foreach ($cart_items as $item) {
+               $item->amount = $item->price * $item->product_count;
+           }
+           /**
+            * CALCULATING TOTAL
+            */
+           $cart_total = 0;
+           foreach($cart_items as $item){
+               $cart_total += $item->amount;
+           }
+        } catch (Exception $e) {
+            
+        }
+        return response()->json(['message' => 'success','item_count' => $cart_item->product_count, 'item_amount' => $item_amount, 'cart_total' => $cart_total],200);
+    }
+
+
 }

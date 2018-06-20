@@ -54,6 +54,10 @@ Route::group(['middleware' => 'auth'], function () {
 		'uses' => 'UserController@showProfilePage',
 		'as' => 'profile.show-profile-page.get'
 		]);
+	Route::post('/profile/cart/delete-item',[
+		'uses' => 'UserController@postDeleteCartItem',
+		'as' => 'profile.delete-cart-item.post'
+	]);
 });
 
 
@@ -69,4 +73,12 @@ Route::post('/ajax/add-to-cart',[
 Route::post('/ajax/check-cart',[
 	'uses' => 'UserController@ajaxCheckCart',
 	'as' => 'ajax.check-cart.post'
+]);
+Route::post('/ajax/decrease-item-count',[
+	'uses' => 'UserController@ajaxDecreaseItemCount',
+	'as' => 'ajax.decrease-item-count.post'
+]);
+Route::post('/ajax/increase-item-count',[
+	'uses' => 'UserController@ajaxIncreaseItemCount',
+	'as' => 'ajax.increase-item-count.post'
 ]);

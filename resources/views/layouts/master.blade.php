@@ -411,4 +411,51 @@ initPhotoSwipeFromDOM('.my-gallery');
 	});
 </script>
 
+<script>
+    $('.decrease-item-count').on('click', function(){
+        var cartItemId = $(this).val();
+        $.ajax({
+            method: 'POST',
+            url: decreaseItemCountUrl,
+            data: {
+                cartItemId : cartItemId,
+                _token : token
+            }
+        })
+        .done(function(msg){
+            console.log(JSON.stringify(msg));
+            if (msg['message'] == 'success'){
+                $('#cart-item-count-' + cartItemId).html(msg['item_count']);
+                $('#cart-item-amount-' + cartItemId).html(msg['item_amount']);
+                $('#cart-total').html(msg['cart_total']);
+            } else {
+            }
+        });
+    });
+</script>
+
+<script>
+    $('.increase-item-count').on('click', function(){
+        var cartItemId = $(this).val();
+        $.ajax({
+            method: 'POST',
+            url: increaseItemCountUrl,
+            data: {
+                cartItemId : cartItemId,
+                _token : token
+            }
+        })
+        .done(function(msg){
+            console.log(JSON.stringify(msg));
+            if (msg['message'] == 'success'){
+                $('#cart-item-count-' + cartItemId).html(msg['item_count']);
+                $('#cart-item-amount-' + cartItemId).html(msg['item_amount']);
+                $('#cart-total').html(msg['cart_total']);
+            } else {
+            }
+        });
+    });
+</script>
+
+
 </html>

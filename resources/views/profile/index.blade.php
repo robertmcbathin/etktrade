@@ -15,7 +15,7 @@ profile-page
 navbar-transparent
 @endsection
 @section('content')
-<div class="page-header page-header-xs" filter-color="orange">
+<div class="page-header page-header-small" filter-color="orange">
 
 
 	<div class="page-header-image" data-parallax="true" style="background-image: url(&quot;../assets/img/bg5.jpg&quot;); transform: translate3d(0px, 0px, 0px);">
@@ -83,38 +83,19 @@ navbar-transparent
 									<div class="table-responsive">
 										<table class="table table-shopping">
 											<thead class="">
-
 												<tr><th class="text-center">
-
-
-
 												</th>
-
 												<th>
-
-
 												</th>
-
-
 												<th class="text-right">
-
 													Цена
-
 												</th>
-
 												<th class="text-right">
-
 													Количество
-
 												</th>
-
 												<th class="text-right">
-
 													Сумма
-
 												</th>
-
-
 											</tr></thead>
 											<tbody>
 												@foreach($cart_items as $cart_item)
@@ -131,19 +112,23 @@ navbar-transparent
 														<i class="fa fa-ruble"></i> {{ $cart_item->price }}
 													</td>
 													<td class="td-number">
-														{{ $cart_item->product_count }}
+														<span id="cart-item-count-{{ $cart_item->item_id }}">{{ $cart_item->product_count }}</span>
 														<div class="btn-group">
-															<button class="btn btn-info btn-sm"> <i class="now-ui-icons ui-1_simple-delete"></i> </button>
-															<button class="btn btn-info btn-sm"> <i class="now-ui-icons ui-1_simple-add"></i> </button>
+															<button class="btn btn-info btn-sm decrease-item-count" data-action="0" value="{{ $cart_item->item_id }}"> <i class="now-ui-icons ui-1_simple-delete"></i> </button>
+															<button class="btn btn-info btn-sm increase-item-count" data-action="1" value="{{ $cart_item->item_id }}"> <i class="now-ui-icons ui-1_simple-add"></i> </button>
 														</div>
 													</td>
 													<td class="td-number">
-														<i class="fa fa-ruble"></i> {{ $cart_item->amount }}
+														<i class="fa fa-ruble"></i> <span id="cart-item-amount-{{ $cart_item->item_id }}">{{ $cart_item->amount }}</span>
 													</td>
 													<td class="td-actions">
-														<button type="button" rel="tooltip" data-placement="left" title="" class="btn btn-neutral" data-original-title="Remove item">
-															<i class="now-ui-icons ui-1_simple-remove"></i>
-														</button>
+														<form action="{{ route('profile.delete-cart-item.post') }}" method="POST">
+															{{ csrf_field() }}
+															<input type="hidden" name="cart_item" value="{{ $cart_item->item_id }}">
+													    	<button type="submit" rel="tooltip" data-placement="left" title="" class="btn btn-neutral" data-original-title="Удалить">
+													    		<i class="now-ui-icons ui-1_simple-remove"></i>
+													    	</button>
+														</form>
 													</td>
 												</tr>
 
@@ -155,7 +140,7 @@ navbar-transparent
 														Итого
 													</td>
 													<td class="td-price">
-														<i class="fa fa-ruble"></i> {{ $cart_total }}
+														<i class="fa fa-ruble"></i> <span id="cart-total">{{ $cart_total }}</span>
 													</td>
 													<td colspan="3" class="text-right">
 														<button type="button" rel="tooltip" class="btn btn-info btn-round " data-original-title="" title="">Перейти к заказу<i class="now-ui-icons arrows-1_minimal-right"></i>
@@ -269,3 +254,8 @@ navbar-transparent
 
 </div>
 @endsection
+<script>
+  var token = '{{ Session::token() }}';
+  var decreaseItemCountUrl = '{{ route('ajax.decrease-item-count.post') }}';
+  var increaseItemCountUrl = '{{ route('ajax.increase-item-count.post') }}';
+</script>
