@@ -192,4 +192,21 @@ class SiteController extends Controller
             'category' => $category
         ]);
     }
+
+    /** 
+    *  AJAX
+    **/
+    public function ajaxSearchProduct(Request $request){
+        $search_string = $request->searchString;
+        $search_results = DB::table('ETKTRADE_PRODUCTS')
+        ->leftJoin('ETKTRADE_SHOPS','ETKTRADE_SHOPS.id', '=', 'ETKTRADE_PRODUCTS.shop_id')
+        ->leftJoin('ETKTRADE_CATEGORIES','ETKTRADE_CATEGORIES.id','=','ETKTRADE_PRODUCTS.category_id')
+        ->leftJoin('ETKTRADE_AVAILABILITY_TYPES','ETKTRADE_AVAILABILITY_TYPES.id','=','ETKTRADE_PRODUCTS.availability')
+        ->select('ETKTRADE_PRODUCTS.name as label', 'ETKTRADE_CATEGORIES.title as category','ETKTRADE_PRODUCTS.id as id')
+        ->where('ETKTRADE_PRODUCTS.name','like','%' . $search_string . '%')
+        ->orWhere('ETKTRADE_PRODUCTS.fullname','like','%' . $search_string . '%')
+        ->get();
+
+        return response()->json(['message' => 'success',  'results' => $search_results],200);
+    }
 }

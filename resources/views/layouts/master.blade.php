@@ -22,7 +22,16 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 	<link href="/assets/css/default-skin.css" rel="stylesheet" />
 	<link href="/assets/css/photoswipe.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/jquery-ui.css">
 	<link rel="stylesheet" href="/assets/css/app.css">
+      <style>
+  .ui-autocomplete-category {
+    font-weight: bold;
+    padding: .2em .4em;
+    margin: .8em 0 .2em;
+    line-height: 1.5;
+  }
+  </style>
 	<!--  Social tags      -->
 	<meta name="keywords" content="@yield('keywords')">
 	<meta name="description" content="@yield('description')">
@@ -46,7 +55,7 @@
 <script src="/assets/js/core/popper.min.js" type="text/javascript"></script>
 <script src="/assets/js/core/bootstrap.min.js" type="text/javascript"></script>
 <script src="/assets/js/plugins/moment.min.js"></script>
-
+<script src="/assets/js/jquery-ui.js"></script>
 <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
 <script src="/assets/js/plugins/bootstrap-switch.js"></script>
 
@@ -457,5 +466,56 @@ initPhotoSwipeFromDOM('.my-gallery');
     });
 </script>
 
+  <script>
+
+    /** SEARCH RESULTS **/
+    var searchResults;
+    $('#product-search').on('keyup',function(){
+
+        var searchString = $(this).val();
+        $.ajax({
+            method: 'POST',
+            url: productSearchUrl,
+            data: {
+                searchString : searchString,
+                _token : token
+            }
+        })
+        .done(function(msg){
+            if (msg['message'] == 'success'){
+                searchResults = msg['results'];
+            } else {
+            }
+        });
+
+    $.widget( "custom.catcomplete", $.ui.autocomplete, {
+      _create: function() {
+        this._super();
+        this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+      },
+      _renderMenu: function( ul, items ) {
+        var that = this,
+          currentCategory = "";
+        $.each( items, function( index, item ) {
+          var li;
+          if ( item.category != currentCategory ) {
+            ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+            currentCategory = item.category;
+          }
+          li = that._renderItemData( ul, item );
+          if ( item.category ) {
+            li.attr( "aria-label", item.category + " : " + item.label );
+          }
+        });
+      }
+    });
+ 
+    console.log(searchResults);
+    $( "#product-search" ).catcomplete({
+      source: searchResults
+    });
+
+    });
+  </script>
 
 </html>

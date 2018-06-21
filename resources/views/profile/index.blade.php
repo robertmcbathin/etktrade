@@ -143,7 +143,7 @@ navbar-transparent
 														<i class="fa fa-ruble"></i> <span id="cart-total">{{ $cart_total }}</span>
 													</td>
 													<td colspan="3" class="text-right">
-														<button type="button" rel="tooltip" class="btn btn-info btn-round " data-original-title="" title="">Перейти к заказу<i class="now-ui-icons arrows-1_minimal-right"></i>
+														<button type="button" rel="tooltip" class="btn btn-primary" data-original-title="" title="">Перейти к заказу<i class="now-ui-icons arrows-1_minimal-right"></i>
 														</button>
 													</td>
 												</tr>

@@ -82,3 +82,7 @@ Route::post('/ajax/increase-item-count',[
 	'uses' => 'UserController@ajaxIncreaseItemCount',
 	'as' => 'ajax.increase-item-count.post'
 ]);
+Route::post('/ajax/search-product',[
+	'uses' => 'SiteController@ajaxSearchProduct',
+	'as' => 'ajax.search-product.post'
+]);

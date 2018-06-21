@@ -1,9 +1,9 @@
 @extends('layouts.master')
 @section('title')
-ЕТК Трейд
+SpaceTrade.in
 @endsection
 @section('description')
-ЕТК Трейд - Единая торговая компания
+SpaceTrade.in
 @endsection
 @section('keywords')
 
@@ -38,7 +38,7 @@
       <div class="row">
         <div class="col-sm-8 ml-auto">
           <div class="input-group">
-            <input type="search" class="form-control search-control" placeholder="Поиск среди товаров">
+            <input type="search" id="product-search" class="form-control search-control" placeholder="Поиск среди товаров">
           </div>
         </div>
 
@@ -260,3 +260,7 @@
 
 </div> <!-- end-main-raised -->
 @endsection
+<script>
+  var token = '{{ Session::token() }}';
+  var productSearchUrl = '{{ route('ajax.search-product.post') }}';
+</script>
