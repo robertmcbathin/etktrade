@@ -47,3 +47,6 @@ input[type="search"]::placeholder{
 .page-header:after, .page-header:before {
     z-index: -2;
 }
+.logo-container-200{
+	width: 200px !important;
+}

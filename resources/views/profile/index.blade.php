@@ -15,7 +15,7 @@ profile-page
 navbar-transparent
 @endsection
 @section('content')
-<div class="page-header page-header-small" filter-color="orange">
+<div class="page-header page-header-xs" filter-color="orange">
 
 
 	<div class="page-header-image" data-parallax="true" style="background-image: url(&quot;../assets/img/bg5.jpg&quot;); transform: translate3d(0px, 0px, 0px);">
@@ -25,7 +25,7 @@ navbar-transparent
 
 
 	<div class="content-center">
-		<div class="photo-container">
+	<!-- <div class="photo-container">
 			<img src="https://etk21.ru{{ Auth::user()->profile_image }}" alt="">
 		</div>
 
@@ -41,7 +41,7 @@ navbar-transparent
 				<h2>0</h2>
 				<p>Отзывы</p>
 			</div>
-		</div>
+		</div> -->	
 	</div>
 
 
@@ -51,7 +51,32 @@ navbar-transparent
 	<div class="container">
 
 		<div class="row">
-			<div class="col-md-12">
+
+			<div class="col-md-3">
+				<div class="card card-testimonial">
+                    <div class="card-avatar">
+                        <a href="#">
+                            <img class="img img-raised" src="https://etk21.ru{{ Auth::user()->profile_image }}">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            <h4 class="title">{{ Auth::user()->name }} {{ Auth::user()->lastname }}</h4>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+			<div class="social-description">
+				<h2>26</h2>
+				<p>Заказы</p>
+			</div>
+			<div class="social-description">
+				<h2>0</h2>
+				<p>Отзывы</p>
+			</div>
+                    </div>
+                </div>
+			</div>
+			<div class="col-md-9">
 				<div class="nav-align-center">
 					<ul class="nav nav-pills nav-pills-primary nav-pills-just-icons" role="tablist">
 						<li class="nav-item">
@@ -134,8 +159,6 @@ navbar-transparent
 
 												@endforeach
 												<tr>
-													<td colspan="3">
-													</td>
 													<td class="td-total">
 														Итого
 													</td>

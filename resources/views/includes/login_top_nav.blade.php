@@ -5,7 +5,7 @@
 
 		<div class="navbar-translate">
 			<a class="navbar-brand" href="/">
-				ЕТК Трейд
+				<img src="/assets/img/logos/st-59.png" alt="">
 			</a>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

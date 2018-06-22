@@ -19,8 +19,8 @@ login-page
                 <div class="col-md-5 ml-auto mr-auto">
                     <div class="card card-login card-plain">
                             <div class="card-header text-center">
-                                <div class="logo-container">
-                                    <img src="../assets/img/now-logo.png" alt="">
+                                <div class="logo-container logo-container-200">
+                                    <img src="../assets/img/logos/st-200.png" alt="">
                                 </div>
                             </div>
                             <div class="card-body">
