@@ -58,6 +58,18 @@ Route::group(['middleware' => 'auth'], function () {
 		'uses' => 'UserController@postDeleteCartItem',
 		'as' => 'profile.delete-cart-item.post'
 	]);
+	Route::get('/profile/order/create',[
+		'uses' => 'UserController@getCreateOrder',
+		'as' => 'profile.create-order.get'
+	]);
+
+	/**
+	 * AJAX
+	 */
+	Route::post('/ajax/select-delivery-method',[
+	'uses' => 'UserController@ajaxSelectDeliveryMethod',
+	'as' => 'ajax.select-delivery-method.post'
+]);
 });
 
 

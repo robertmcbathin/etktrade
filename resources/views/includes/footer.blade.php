@@ -6,7 +6,7 @@
 
         <div class="content">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <h5>Покупателям</h5>
                     <ul class="links-vertical">
                         <li>
@@ -36,7 +36,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <h5>Сотрудничество</h5>
                     <ul class="links-vertical">
                         <li>

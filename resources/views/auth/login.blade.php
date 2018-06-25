@@ -13,7 +13,7 @@ login-page
 @endsection
 @section('content')
         <div class="page-header" filter-color="orange">
-        <div class="page-header-image" style="background-image:url(../assets/img/login.jpg)"></div>
+        <div class="page-header-image" style="background-image:url(/assets/img/bg1.jpg); background-repeat: repeat;"></div>
         <div class="content">
             <div class="container">
                 <div class="col-md-5 ml-auto mr-auto">

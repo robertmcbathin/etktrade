@@ -85,6 +85,6 @@ class LoginController extends Controller
 
     public function logout(Request $request){
         Auth::logout();
-        return redirect()->route('site.show-index.get');
+        return redirect()->route('site.show-main-page.get');
     }
 }

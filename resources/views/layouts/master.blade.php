@@ -518,4 +518,25 @@ initPhotoSwipeFromDOM('.my-gallery');
     });
   </script>
 
+  <script>
+      $('#delivery-method').on('change', function(){
+        var deliveryMethod = $('#delivery-method').val();
+        $.ajax({
+            method: 'POST',
+            url: selectDeliveryMethodUrl,
+            data: {
+                deliveryMethod : deliveryMethod,
+                _token : token
+            }
+        })
+        .done(function(msg){
+            if (msg['message'] == 'success'){
+              var deliveryHtml = '<tr id="delivery-row"><td colspan="4"></td><td class="text-right">' + msg.deliveryMethod + '</td><td class="text-right"><i class="fa fa-ruble"></i>' + msg.deliveryCost + '</td></tr>';
+              $('#delivery-row').replaceWith(deliveryHtml);
+            } else {
+            }
+        });
+      });
+  </script>
+
 </html>

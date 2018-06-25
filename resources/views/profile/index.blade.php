@@ -15,10 +15,10 @@ profile-page
 navbar-transparent
 @endsection
 @section('content')
-<div class="page-header page-header-xs" filter-color="orange">
+<div class="page-header page-header-xs" filter-color="primary">
 
 
-	<div class="page-header-image" data-parallax="true" style="background-image: url(&quot;../assets/img/bg5.jpg&quot;); transform: translate3d(0px, 0px, 0px);">
+	<div class="page-header-image" data-parallax="true" style="background-image: url(&quot;../assets/img/bg1.jpg&quot;); background-repeat: repeat; transform: translate3d(0px, 0px, 0px);">
 	</div>
 
 
@@ -127,11 +127,11 @@ navbar-transparent
 												<tr>
 													<td>
 														<div class="img-container">
-															<img src="{{ $cart_item->image }}" alt="">
+															<img src="{{ $cart_item->image }}" alt="" width="50px">
 														</div>
 													</td>
 													<td class="td-name">
-														<a>{{ $cart_item->name }}</a>
+														<a href="{{ route('site.show-product-page.get',['product_id' => $cart_item->product_id]) }}" target="_blank">{{ $cart_item->name }}</a>
 													</td>
 													<td class="td-number">
 														<i class="fa fa-ruble"></i> {{ $cart_item->price }}
@@ -166,8 +166,9 @@ navbar-transparent
 														<i class="fa fa-ruble"></i> <span id="cart-total">{{ $cart_total }}</span>
 													</td>
 													<td colspan="3" class="text-right">
-														<button type="button" rel="tooltip" class="btn btn-primary" data-original-title="" title="">Перейти к заказу<i class="now-ui-icons arrows-1_minimal-right"></i>
-														</button>
+													    	<a href="{{ route('profile.create-order.get') }}" rel="tooltip" class="btn btn-primary" data-original-title="" title="">Перейти к заказу <i class="now-ui-icons arrows-1_minimal-right"></i>
+															
+														</a>															
 													</td>
 												</tr>
 											</tbody>

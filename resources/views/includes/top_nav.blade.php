@@ -58,16 +58,19 @@
 				</li>
 				@guest
 				<li class="nav-item">
-					<a class="nav-link btn btn-neutral" href="/login" target="_blank">
+					<a class="nav-link btn btn-neutral" href="/login">
 						<p> ВОЙТИ</p>
 					</a>
 				</li>
 				@endguest
 				@auth
 				<li class="nav-item">
-					<a class="nav-link btn btn-neutral" href="/logout" target="_blank">
+					<form action="{{ route('logout') }}" method="POST">
+						{{ csrf_field() }}
+					<button type="submit" class="nav-link btn btn-neutral">
 						<p> ВЫЙТИ</p>
-					</a>
+					</button>
+					</form>
 				</li>
 				@endauth
 

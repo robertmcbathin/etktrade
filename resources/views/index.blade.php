@@ -18,7 +18,7 @@ SpaceTrade.in
   <div class="carousel-inner" role="listbox">
     <div class="carousel-item">
       <div class="page-header header-filter header-mini">
-        <div class="page-header-image" style="background-image: url('/assets/img/bg40.jpg');"></div>
+        <div class="page-header-image" style="background-image: url('/assets/img/bg40.jpg'); background-repeat: repeat; "></div>
         <div class="content-center text-center">
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto2">
@@ -36,7 +36,7 @@ SpaceTrade.in
   <div class="section section-search">
     <div class="container">
       <div class="row">
-        <div class="col-sm-8 ml-auto">
+        <div class="col-sm-4 ml-auto">
           <div class="input-group">
             <input type="search" id="product-search" class="form-control search-control" placeholder="Поиск среди товаров">
           </div>
